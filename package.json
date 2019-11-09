@@ -1,0 +1,25 @@
+{
+  "name": "m3k6",
+  "version": "0.1.0",
+  "description": "类大富翁类型，三国题材的Q版战旗游戏",
+  "scripts": {
+    "format": "prettier --config .prettierrc --write 'assets/Script/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlq4863947/m3k6.git"
+  },
+  "keywords": [
+    "m3k6",
+    "富甲天下6"
+  ],
+  "author": "zlq4863947@gmail.com",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/zlq4863947/m3k6/issues"
+  },
+  "homepage": "https://github.com/zlq4863947/m3k6#readme",
+  "devDependencies": {
+    "prettier": "^1.19.0"
+  }
+}

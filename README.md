@@ -16,7 +16,6 @@
 具体请参考[维基百科](https://zh.wikipedia.org/wiki/%E5%AF%8C%E7%94%B2%E5%A4%A9%E4%B8%8B%E7%B3%BB%E5%88%97)
 
 ### 富甲天下 6 是什么?
-
 由[zlq4863947](https://github.com/zlq4863947)使用[cocos creator](https://www.cocos.com/products#CocosCreator)技术开发，主要基于富甲天下 3 的一款支持全平台、完全开源的休闲游戏。
 
 ### 支持的平台
