@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "类大富翁类型，三国题材的Q版战旗游戏",
   "scripts": {
-    "format": "prettier --config .prettierrc --write 'assets/Script/**/*.ts'"
+    "format": "prettier --config .prettierrc --write 'assets/Script/**/*.ts'",
+    "deploy": "git subtree push --prefix build/web-desktop origin gh-pages"
   },
   "repository": {
     "type": "git",
