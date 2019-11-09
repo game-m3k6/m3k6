@@ -26,6 +26,10 @@
 
 - 做到哪算哪
 
+### 游戏界面
+
+<p align="center"><img src="public/images/main.png"></p>
+
 ### 开源协议
 
 [GPL-3.0-or-later](LICENSE)

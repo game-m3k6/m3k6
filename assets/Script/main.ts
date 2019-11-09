@@ -1,4 +1,5 @@
 import EventType = cc.Node.EventType;
+import { setMouseCursor } from './utils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -23,6 +24,24 @@ export default class Main extends cc.Component {
   start() {
     this.version.string = 'v0.1.0';
     this.initMenu();
+    setMouseCursor(cc.game.canvas);
+    // debugger
+    // cc.game.canvas.
+    /*cc.game.canvas.∏
+    setTimeout(()=> {
+      // debugger
+      cc.game.canvas.style.cursor = "url('/res/import/ce/ce41cd0d-d754-49e4-afc0-e3dc17d1514b.png',auto)";
+      cc.log('cursor： '+cc.game.canvas.style.cursor)
+    },2000);*/
+
+    // cc.canvas.style.cursor = "none";
+    // cc.Canvas
+  }
+
+  onLoad() {
+    // cc.game.canvas.style.cursor = "url('/res/import/ce/ce41cd0d-d754-49e4-afc0-e3dc17d1514b.png',auto)"
+    // this.node.on(cc.Node.EventType.TOUCH_START, this.mouseStart, this);
+    // this.node.on(cc.Node.EventType.TOUCH_END, this.mouseEnd, this);
   }
 
   private initMenu(): void {
@@ -35,11 +54,7 @@ export default class Main extends cc.Component {
   }
 
   private setHoverEvent(el: cc.Node): void {
-    el.on(EventType.MOUSE_ENTER, () => {
-      el.opacity = 255;
-    });
-    el.on(EventType.MOUSE_LEAVE, () => {
-      el.opacity = 0;
-    });
+    el.on(EventType.MOUSE_ENTER, () => (el.opacity = 255));
+    el.on(EventType.MOUSE_LEAVE, () => (el.opacity = 0));
   }
 }
