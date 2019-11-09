@@ -171,7 +171,7 @@
       "array": [
         0,
         0,
-        548.194091796875,
+        475.44793701171875,
         0,
         0,
         0,
@@ -2113,8 +2113,14 @@
     "storyHover": {
       "__id__": 41
     },
-    "audio": {
+    "bgm": {
       "__uuid__": "b77052db-880f-47d2-b418-6bf39818a523"
+    },
+    "clickAudio": {
+      "__uuid__": "8fbfa5f0-1bca-40d8-8c18-6f1693127ec3"
+    },
+    "moveAudio": {
+      "__uuid__": "9793e4f1-86c5-4c1d-9790-d24e4e6cb4a6"
     },
     "_id": "6beTopZdxBS4uI5JAxtmRw"
   }

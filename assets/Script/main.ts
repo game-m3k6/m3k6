@@ -21,30 +21,53 @@ export default class Main extends cc.Component {
   @property(cc.Node)
   storyHover: cc.Node = null;
 
-  @property(cc.AudioClip)
-  audio: cc.AudioClip = null;
+  @property({ type: cc.AudioClip })
+  bgm: cc.AudioClip = null;
+  @property({ type: cc.AudioClip })
+  clickAudio: cc.AudioClip = null;
+  @property({ type: cc.AudioClip })
+  moveAudio: cc.AudioClip = null;
 
   start() {
     this.version.string = 'v0.1.0';
     this.initMenu();
     setMouseCursor(cc.game.canvas);
-    cc.audioEngine.playEffect(this.audio, true);
+    cc.audioEngine.playEffect(this.bgm, true);
   }
 
-  onLoad() {
-  }
+  onLoad() {}
 
   private initMenu(): void {
-    this.setHoverEvent(this.exitHover);
-    this.setHoverEvent(this.staffHover);
-    this.setHoverEvent(this.settingHover);
-    this.setHoverEvent(this.loadingHover);
-    this.setHoverEvent(this.stageHover);
-    this.setHoverEvent(this.storyHover);
+    this.setEvent(this.exitHover);
+    this.setEvent(this.staffHover);
+    this.setEvent(this.settingHover);
+    this.setEvent(this.loadingHover);
+    this.setEvent(this.stageHover);
+    this.setEvent(this.storyHover);
+  }
+
+  private setEvent(el: cc.Node): void {
+    this.setHoverEvent(el);
+    this.setClickEvent(el);
   }
 
   private setHoverEvent(el: cc.Node): void {
-    el.on(EventType.MOUSE_ENTER, () => (el.opacity = 255));
+    el.on(EventType.MOUSE_ENTER, () => {
+      el.opacity = 255;
+      cc.audioEngine.playEffect(this.moveAudio, false);
+    });
     el.on(EventType.MOUSE_LEAVE, () => (el.opacity = 0));
+  }
+
+  private setClickEvent(el: cc.Node): void {
+    el.on(EventType.MOUSE_DOWN, () => {
+      switch (el) {
+        case this.storyHover: {
+          cc.director.loadScene('select-master');
+          break;
+        }
+      }
+      cc.audioEngine.playEffect(this.clickAudio, false);
+    });
   }
 }
