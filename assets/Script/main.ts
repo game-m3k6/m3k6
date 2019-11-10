@@ -1,5 +1,6 @@
 import EventType = cc.Node.EventType;
 import { setMouseCursor } from './utils';
+import { GameScene } from './constants';
 
 const { ccclass, property } = cc._decorator;
 
@@ -63,7 +64,7 @@ export default class Main extends cc.Component {
     el.on(EventType.MOUSE_DOWN, () => {
       switch (el) {
         case this.storyHover: {
-          cc.director.loadScene('select-master');
+          cc.director.loadScene(GameScene.SelectMaster);
           break;
         }
       }

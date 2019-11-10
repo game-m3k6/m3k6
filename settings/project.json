@@ -15,20 +15,20 @@
   "fit-height": true,
   "use-project-simulator-setting": false,
   "simulator-orientation": false,
-  "use-customize-simulator": false,
+  "use-customize-simulator": true,
   "simulator-resolution": {
-    "width": 960,
-    "height": 640
+    "height": 640,
+    "width": 960
   },
   "last-module-event-record-time": 1573304933087,
   "assets-sort-type": "name",
   "facebook": {
-    "enable": false,
     "appID": "",
-    "live": {
+    "audience": {
       "enable": false
     },
-    "audience": {
+    "enable": false,
+    "live": {
       "enable": false
     }
   }
