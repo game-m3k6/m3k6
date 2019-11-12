@@ -5,7 +5,7 @@ import { GameScene } from './constants';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export class SelectMaster extends cc.Component {
   @property(cc.Node)
   nodeCao: cc.Node = null;
   @property(cc.Node)

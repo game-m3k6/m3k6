@@ -12,3 +12,7 @@ export enum GameScene {
    */
   Map005 = 'map005',
 }
+
+export enum City {
+  Map005Zhuya = '朱崖城',
+}
