@@ -60,23 +60,32 @@ export class MinterView extends cc.Component {
   enabled = true;
   state: ZhugeDice6 | ZhugeDice9 | ZhugeDice12;
 
-  start() {}
+  start() {
+    this.setClickEvents([this.dice6Clicked, this.dice9Clicked, this.dice12Clicked]);
+    showMouseCursor();
+  }
 
   update(dt) {
-    console.log(this.state, this.dice.x, this.dice.y);
+    // console.log(this.state, this.dice.x, this.dice.y);
     // this.dice.x = this.getDiceX(this.state.dice);
   }
 
   onLoad() {
     console.log('onLoad');
-    this.setClickEvents([this.dice6Clicked, this.dice9Clicked, this.dice12Clicked]);
-    showMouseCursor();
-    setTimeout(() => {
+    hideNode(this.node);
+    this.scheduleOnce(() => {
       this.load({
         max: 12,
         dice: 7,
       });
-    }, 1000);
+      showNode(this.node);
+    });
+    /*setTimeout(() => {
+      this.load({
+        max: 12,
+        dice: 7,
+      });
+    }, 1000);*/
   }
 
   /**
@@ -84,6 +93,7 @@ export class MinterView extends cc.Component {
    * @param minter
    */
   load(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12) {
+    console.log(1111);
     this.state = minter;
     this.dice.x = this.getDiceX(this.state.dice);
     // this.dice.setPosition(cc.v2(this.getDiceX(this.state.dice), this.dice.y));
@@ -118,6 +128,10 @@ export class MinterView extends cc.Component {
     elList.forEach((el) => this.setClickEvent(el));
   }
 
+  /**
+   * 设置算珠点击事件
+   * @param el 算珠元素
+   */
   private setClickEvent(el: Node): void {
     el.on(EventType.MOUSE_UP, () => {
       if (!this.enabled) {
@@ -137,7 +151,7 @@ export class MinterView extends cc.Component {
           break;
         }
         case this.dice12Clicked: {
-          if (this.state.max >= 9) {
+          if (this.state.max === 12) {
             hideNode(this.dice12Clicked);
             this.diceAction(12);
           }
@@ -155,11 +169,28 @@ export class MinterView extends cc.Component {
           showNode(this.dice6Clicked);
           break;
         }
+        case this.dice9Clicked: {
+          if (this.state.max >= 9) {
+            showNode(this.dice9Clicked);
+          }
+          break;
+        }
+        case this.dice12Clicked: {
+          if (this.state.max === 12) {
+            showNode(this.dice12Clicked);
+          }
+          break;
+        }
       }
     });
   }
 
-  private diceAction(max: number): void {
+  /**
+   * 摇骰子
+   * @param max 骰子最大值
+   * @return 骰子数
+   */
+  private diceAction(max: number): number {
     const callback = cc.callFunc(() => {
       this.enabled = true;
       showMouseCursor();
@@ -167,11 +198,14 @@ export class MinterView extends cc.Component {
 
     const push = cc.moveTo(0.5, this.getDiceX(max), this.dice.y);
     const pull = cc.moveTo(0.5, this.getDiceX(1), this.dice.y);
-    const diceX = this.getDiceX(getRandomInt(1, max));
+    const diceNum = getRandomInt(1, max);
+    const diceX = this.getDiceX(diceNum);
     const target = cc.moveTo(0.5, diceX, this.dice.y);
     const seq = cc.sequence(push, pull, target, callback); //.easing(cc.easeOut(2));;
     this.dice.runAction(cc.speed(seq, 2));
     hideMouseCursor();
     this.enabled = false;
+
+    return diceNum;
   }
 }
