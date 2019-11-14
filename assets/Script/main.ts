@@ -1,5 +1,5 @@
 import EventType = cc.Node.EventType;
-import { setMouseCursor } from './utils';
+import { hideNode, showMouseCursor, showNode } from './utils';
 import { GameScene } from './constants';
 
 const { ccclass, property } = cc._decorator;
@@ -32,7 +32,7 @@ export default class Main extends cc.Component {
   start() {
     this.version.string = 'v0.1.0';
     this.initMenu();
-    setMouseCursor(cc.game.canvas);
+    showMouseCursor();
     cc.audioEngine.playEffect(this.bgm, true);
   }
 
@@ -54,10 +54,10 @@ export default class Main extends cc.Component {
 
   private setHoverEvent(el: cc.Node): void {
     el.on(EventType.MOUSE_ENTER, () => {
-      el.opacity = 255;
+      showNode(el);
       cc.audioEngine.playEffect(this.moveAudio, false);
     });
-    el.on(EventType.MOUSE_LEAVE, () => (el.opacity = 0));
+    el.on(EventType.MOUSE_LEAVE, () => hideNode(el));
   }
 
   private setClickEvent(el: cc.Node): void {
