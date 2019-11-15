@@ -3,6 +3,7 @@ export function showNode(node: cc.Node | cc.Node[]): void {
     for (const n of node) {
       n.opacity = 255;
     }
+
     return;
   }
 
@@ -14,6 +15,7 @@ export function hideNode(node: cc.Node | cc.Node[]): void {
     for (const n of node) {
       n.opacity = 0;
     }
+
     return;
   }
 

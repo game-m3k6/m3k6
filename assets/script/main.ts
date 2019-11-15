@@ -31,14 +31,14 @@ export default class Main extends cc.Component {
   @property({ type: cc.AudioClip })
   moveAudio: cc.AudioClip = null;
 
-  start() {
+  start(): void {
     this.version.string = 'v0.1.0';
     this.initMenu();
     showMouseCursor();
     cc.audioEngine.playEffect(this.bgm, true);
   }
 
-  onLoad() {}
+  onLoad(): void {}
 
   private initMenu(): void {
     this.setEvent(this.exitHover);
@@ -68,6 +68,8 @@ export default class Main extends cc.Component {
         case this.storyHover: {
           cc.director.loadScene(GameScene.SelectMaster);
           break;
+        }
+        default: {
         }
       }
       cc.audioEngine.playEffect(this.clickAudio, false);

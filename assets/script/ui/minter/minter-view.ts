@@ -60,17 +60,17 @@ export class MinterView extends cc.Component {
   enabled = true;
   state: ZhugeDice6 | ZhugeDice9 | ZhugeDice12;
 
-  start() {
+  start(): void {
     this.setClickEvents([this.dice6Clicked, this.dice9Clicked, this.dice12Clicked]);
     showMouseCursor();
   }
 
-  update(dt) {
+  update(dt: number): void {
     // console.log(this.state, this.dice.x, this.dice.y);
     // this.dice.x = this.getDiceX(this.state.dice);
   }
 
-  onLoad() {
+  onLoad(): void {
     console.log('onLoad');
     this.load({
       max: 9,
@@ -88,7 +88,7 @@ export class MinterView extends cc.Component {
    * 加载骰子控制器
    * @param minter
    */
-  load(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12) {
+  load(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12): void {
     const fn = () => {
       this.state = minter;
       this.dice.x = this.getDiceX(this.state.dice);
@@ -109,6 +109,8 @@ export class MinterView extends cc.Component {
           hideNode([this.dice6Ind, this.dice9Ind]);
           break;
         }
+        default: {
+        }
       }
     };
 
@@ -123,11 +125,11 @@ export class MinterView extends cc.Component {
    * 获取骰子x位置
    * @param diceNum 骰子数（最小1、最大12）
    */
-  private getDiceX(diceNum: number) {
+  private getDiceX(diceNum: number): number {
     return getDiceX(this.dice6Ind.x, diceNum);
   }
 
-  private setClickEvents(elList: Node[]) {
+  private setClickEvents(elList: Node[]): void {
     elList.forEach((el) => this.setClickEvent(el));
   }
 
@@ -160,6 +162,8 @@ export class MinterView extends cc.Component {
           }
           break;
         }
+        default: {
+        }
       }
     });
 
@@ -184,6 +188,8 @@ export class MinterView extends cc.Component {
           }
           break;
         }
+        default: {
+        }
       }
     });
   }
@@ -204,7 +210,7 @@ export class MinterView extends cc.Component {
     const diceNum = getRandomInt(1, max);
     const diceX = this.getDiceX(diceNum);
     const target = cc.moveTo(0.5, diceX, this.dice.y);
-    const seq = cc.sequence(push, pull, target, callback); //.easing(cc.easeOut(2));;
+    const seq = cc.sequence(push, pull, target, callback); // .easing(cc.easeOut(2));
     this.dice.runAction(cc.speed(seq, 2));
     hideMouseCursor();
     this.enabled = false;

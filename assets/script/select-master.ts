@@ -33,7 +33,7 @@ export class SelectMaster extends cc.Component {
   @property(cc.Node)
   cancel: cc.Node = null;
 
-  start() {
+  start(): void {
     this.setSelectMasterEvent(this.nodeCao);
     this.setSelectMasterEvent(this.nodeSun);
     this.setSelectMasterEvent(this.nodeLiu);
@@ -54,6 +54,8 @@ export class SelectMaster extends cc.Component {
           cc.director.loadScene(GameScene.Main);
           break;
         }
+        default: {
+        }
       }
       // cc.audioEngine.playEffect(this.clickAudio, false);
     });
@@ -67,6 +69,8 @@ export class SelectMaster extends cc.Component {
         case this.cancel: {
           showNode(this.cancel);
           break;
+        }
+        default: {
         }
       }
     });
@@ -86,6 +90,8 @@ export class SelectMaster extends cc.Component {
         case this.nodeLiu: {
           this.checkLiuHandle();
           break;
+        }
+        default: {
         }
       }
     });

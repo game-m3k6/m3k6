@@ -7,10 +7,10 @@ export default class Map005 extends cc.Component {
   @property(cc.TiledMap)
   tiledMap: cc.TiledMap = null;
 
-  start() {
+  start(): void {
     // const node = new cc.Node('city Node');
     // const sprite = node.addComponent(cc.Sprite);
-    //debugger
+    // debugger
     /*const texture2D = new Texture2D();
     texture2D.url = url;
     sprite.spriteFrame = new cc.SpriteFrame(texture2D);*/

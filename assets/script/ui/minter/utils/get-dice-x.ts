@@ -4,7 +4,7 @@
  * @param centerX 骰子进度条中心位置
  * @param diceNum 骰子数（最小1、最大12）
  */
-export function getDiceX(centerX: number, diceNum: number) {
+export function getDiceX(centerX: number, diceNum: number): number {
   switch (diceNum) {
     case 1: {
       return centerX - 8 - 75 + 2;
@@ -41,6 +41,8 @@ export function getDiceX(centerX: number, diceNum: number) {
     }
     case 12: {
       return centerX - 8 + 90 - 2;
+    }
+    default: {
     }
   }
 }
