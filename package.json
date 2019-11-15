@@ -38,6 +38,7 @@
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
+    "typescript": "3.3.3333",
     "vrsource-tslint-rules": "^6.0.0",
     "yarn": "^1.19.1"
   }

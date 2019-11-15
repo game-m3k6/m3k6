@@ -43,6 +43,7 @@ export function getDiceX(centerX: number, diceNum: number): number {
       return centerX - 8 + 90 - 2;
     }
     default: {
+      return 0;
     }
   }
 }

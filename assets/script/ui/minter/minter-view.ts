@@ -2,7 +2,6 @@ import { ZhugeDice12, ZhugeDice6, ZhugeDice9 } from '../../models';
 import { getRandomInt, hideMouseCursor, hideNode, showMouseCursor, showNode } from '../../utils';
 import { getDiceX } from './utils';
 import EventType = cc.Node.EventType;
-import Node = cc.Node;
 
 const { ccclass, property } = cc._decorator;
 
@@ -12,49 +11,49 @@ export class MinterView extends cc.Component {
     type: cc.Node,
     tooltip: '骰子滚动条的圆珠',
   })
-  dice!: cc.Node;
+  dice: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛六算珠滚动条',
   })
-  dice6Ind!: cc.Node;
+  dice6Ind: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠滚动条',
   })
-  dice9Ind!: cc.Node;
+  dice9Ind: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛六算珠(点击状态)',
   })
-  dice6Clicked!: cc.Node;
+  dice6Clicked: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠',
   })
-  dice9!: cc.Node;
+  dice9: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠(点击状态)',
   })
-  dice9Clicked!: cc.Node;
+  dice9Clicked: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛十二算珠',
   })
-  dice12!: cc.Node;
+  dice12: cc.Node = null;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛十二算珠(点击状态)',
   })
-  dice12Clicked!: cc.Node;
+  dice12Clicked: cc.Node = null;
 
   // 是否禁用事件
   enabled = true;
@@ -65,7 +64,7 @@ export class MinterView extends cc.Component {
     this.state = {
       max: 9,
       dice: 6,
-    }
+    };
   }
 
   start(): void {
@@ -137,7 +136,7 @@ export class MinterView extends cc.Component {
     return getDiceX(this.dice6Ind.x, diceNum);
   }
 
-  private setClickEvents(elList: Node[]): void {
+  private setClickEvents(elList: cc.Node[]): void {
     elList.forEach((el) => this.setClickEvent(el));
   }
 
@@ -145,7 +144,7 @@ export class MinterView extends cc.Component {
    * 设置算珠点击事件
    * @param el 算珠元素
    */
-  private setClickEvent(el: Node): void {
+  private setClickEvent(el: cc.Node): void {
     el.on(EventType.MOUSE_UP, () => {
       if (!this.enabled) {
         return;
