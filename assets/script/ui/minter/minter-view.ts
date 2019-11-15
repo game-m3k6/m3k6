@@ -1,7 +1,7 @@
-import { getRandomInt, hideMouseCursor, hideNode, showMouseCursor, showNode } from '../../utils';
-import EventType = cc.Node.EventType;
 import { ZhugeDice12, ZhugeDice6, ZhugeDice9 } from '../../models';
+import { getRandomInt, hideMouseCursor, hideNode, showMouseCursor, showNode } from '../../utils';
 import { getDiceX } from './utils';
+import EventType = cc.Node.EventType;
 import Node = cc.Node;
 
 const { ccclass, property } = cc._decorator;
@@ -72,13 +72,9 @@ export class MinterView extends cc.Component {
 
   onLoad() {
     console.log('onLoad');
-    hideNode(this.node);
-    this.scheduleOnce(() => {
-      this.load({
-        max: 12,
-        dice: 7,
-      });
-      showNode(this.node);
+    this.load({
+      max: 9,
+      dice: 6,
     });
     /*setTimeout(() => {
       this.load({
@@ -93,27 +89,34 @@ export class MinterView extends cc.Component {
    * @param minter
    */
   load(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12) {
-    console.log(1111);
-    this.state = minter;
-    this.dice.x = this.getDiceX(this.state.dice);
-    // this.dice.setPosition(cc.v2(this.getDiceX(this.state.dice), this.dice.y));
-    switch (minter.max) {
-      case 6: {
-        showNode([this.dice6Ind]);
-        hideNode([this.dice9, this.dice12]);
-        break;
+    const fn = () => {
+      this.state = minter;
+      this.dice.x = this.getDiceX(this.state.dice);
+      // this.dice.setPosition(cc.v2(this.getDiceX(this.state.dice), this.dice.y));
+      switch (minter.max) {
+        case 6: {
+          showNode([this.dice6Ind]);
+          hideNode([this.dice9, this.dice12]);
+          break;
+        }
+        case 9: {
+          showNode([this.dice9, this.dice9Ind]);
+          hideNode([this.dice12, this.dice6Ind]);
+          break;
+        }
+        case 12: {
+          showNode([this.dice9, this.dice12]);
+          hideNode([this.dice6Ind, this.dice9Ind]);
+          break;
+        }
       }
-      case 9: {
-        showNode([this.dice9, this.dice9Ind]);
-        hideNode([this.dice12, this.dice6Ind]);
-        break;
-      }
-      case 12: {
-        showNode([this.dice9, this.dice12]);
-        hideNode([this.dice6Ind, this.dice9Ind]);
-        break;
-      }
-    }
+    };
+
+    hideNode(this.node);
+    this.scheduleOnce(() => {
+      fn();
+      showNode(this.node);
+    });
   }
 
   /**

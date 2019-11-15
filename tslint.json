@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "cyclomatic-complexity": false,
+    "deprecation": false,
+    "no-console": [
+      true,
+      "debug",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-submodule-imports": [
+      false,
+      "rxjs"
+    ],
+    "no-unused-expression": false,
+    "no-var-requires": false,
+    "no-non-null-assertion": false,
+    "only-arrow-functions": [false, "allow-declarations", "allow-named-functions"],
+    "ordered-imports": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ]
+  }
+}

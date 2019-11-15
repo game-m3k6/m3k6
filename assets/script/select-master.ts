@@ -1,6 +1,7 @@
 import EventType = cc.Node.EventType;
-import { hideNode, showNode } from './utils';
+
 import { GameScene } from './constants';
+import { hideNode, showNode } from './utils';
 
 const { ccclass, property } = cc._decorator;
 

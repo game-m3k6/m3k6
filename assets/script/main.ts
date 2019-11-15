@@ -1,6 +1,8 @@
+/// <reference path="../../creator.d.ts" />
 import EventType = cc.Node.EventType;
-import { hideNode, showMouseCursor, showNode } from './utils';
+
 import { GameScene } from './constants';
+import { hideNode, showMouseCursor, showNode } from './utils';
 
 const { ccclass, property } = cc._decorator;
 

@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "description": "类大富翁类型，三国题材的Q版战旗游戏",
   "scripts": {
-    "format": "prettier --config .prettierrc --write 'assets/script/**/*.ts'",
-    "deploy": "git subtree push --prefix public/web-desktop origin gh-pages"
+    "deploy": "git subtree push --prefix public/web-desktop origin gh-pages",
+    "format": "yarn format:ts",
+    "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write 'assets/script/**/*.ts'",
+    "format:ts:import": "import-sort --write 'assets/script/**/*.ts'",
+    "jest": "jest -c jest.config.js",
+    "lint": "yarn lint:ts",
+    "lint:ts": "tslint -p tsconfig.app.json -c tslint.json",
+    "test": "yarn jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -21,6 +27,18 @@
   },
   "homepage": "https://github.com/zlq4863947/m3k6#readme",
   "devDependencies": {
-    "prettier": "^1.19.0"
+    "@types/jest": "^24.0.23",
+    "import-sort": "^6.0.0",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-parser-typescript": "^6.0.0",
+    "import-sort-style-module-alias": "^1.0.4",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "vrsource-tslint-rules": "^6.0.0",
+    "yarn": "^1.19.1"
   }
 }
