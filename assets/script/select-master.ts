@@ -8,30 +8,30 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export class SelectMaster extends cc.Component {
   @property(cc.Node)
-  nodeCao: cc.Node = null;
+  nodeCao!: cc.Node;
   @property(cc.Node)
-  nodeSun: cc.Node = null;
+  nodeSun!: cc.Node;
   @property(cc.Node)
-  nodeLiu: cc.Node = null;
+  nodeLiu!: cc.Node;
 
   @property(cc.Node)
-  goldCao: cc.Node = null;
+  goldCao!: cc.Node;
   @property(cc.Node)
-  goldSun: cc.Node = null;
+  goldSun!: cc.Node;
   @property(cc.Node)
-  goldLiu: cc.Node = null;
+  goldLiu!: cc.Node;
 
   @property(cc.Node)
-  checkCao: cc.Node = null;
+  checkCao!: cc.Node;
   @property(cc.Node)
-  checkSun: cc.Node = null;
+  checkSun!: cc.Node;
   @property(cc.Node)
-  checkLiu: cc.Node = null;
+  checkLiu!: cc.Node;
 
   @property(cc.Node)
-  ok: cc.Node = null;
+  ok!: cc.Node;
   @property(cc.Node)
-  cancel: cc.Node = null;
+  cancel!: cc.Node;
 
   start(): void {
     this.setSelectMasterEvent(this.nodeCao);

@@ -12,53 +12,61 @@ export class MinterView extends cc.Component {
     type: cc.Node,
     tooltip: '骰子滚动条的圆珠',
   })
-  dice: cc.Node = null;
+  dice!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛六算珠滚动条',
   })
-  dice6Ind: cc.Node = null;
+  dice6Ind!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠滚动条',
   })
-  dice9Ind: cc.Node = null;
+  dice9Ind!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛六算珠(点击状态)',
   })
-  dice6Clicked: cc.Node = null;
+  dice6Clicked!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠',
   })
-  dice9: cc.Node = null;
+  dice9!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛九算珠(点击状态)',
   })
-  dice9Clicked: cc.Node = null;
+  dice9Clicked!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛十二算珠',
   })
-  dice12: cc.Node = null;
+  dice12!: cc.Node;
 
   @property({
     type: cc.Node,
     tooltip: '诸葛十二算珠(点击状态)',
   })
-  dice12Clicked: cc.Node = null;
+  dice12Clicked!: cc.Node;
 
   // 是否禁用事件
   enabled = true;
   state: ZhugeDice6 | ZhugeDice9 | ZhugeDice12;
+
+  constructor() {
+    super();
+    this.state = {
+      max: 9,
+      dice: 6,
+    }
+  }
 
   start(): void {
     this.setClickEvents([this.dice6Clicked, this.dice9Clicked, this.dice12Clicked]);

@@ -5,7 +5,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Map005 extends cc.Component {
   @property(cc.TiledMap)
-  tiledMap: cc.TiledMap = null;
+  tiledMap!: cc.TiledMap;
 
   start(): void {
     // const node = new cc.Node('city Node');

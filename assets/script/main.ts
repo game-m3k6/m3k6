@@ -9,27 +9,27 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Main extends cc.Component {
   @property(cc.Label)
-  version: cc.Label = null;
+  version!: cc.Label;
 
   @property(cc.Node)
-  exitHover: cc.Node = null;
+  exitHover!: cc.Node;
   @property(cc.Node)
-  staffHover: cc.Node = null;
+  staffHover!: cc.Node;
   @property(cc.Node)
-  settingHover: cc.Node = null;
+  settingHover!: cc.Node;
   @property(cc.Node)
-  loadingHover: cc.Node = null;
+  loadingHover!: cc.Node;
   @property(cc.Node)
-  stageHover: cc.Node = null;
+  stageHover!: cc.Node;
   @property(cc.Node)
-  storyHover: cc.Node = null;
+  storyHover!: cc.Node;
 
   @property({ type: cc.AudioClip })
-  bgm: cc.AudioClip = null;
+  bgm!: cc.AudioClip;
   @property({ type: cc.AudioClip })
-  clickAudio: cc.AudioClip = null;
+  clickAudio!: cc.AudioClip;
   @property({ type: cc.AudioClip })
-  moveAudio: cc.AudioClip = null;
+  moveAudio!: cc.AudioClip;
 
   start(): void {
     this.version.string = 'v0.1.0';
