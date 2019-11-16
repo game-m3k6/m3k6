@@ -4829,7 +4829,7 @@ declare namespace cc {
 		!#en Return texture.
 		!#zh 获取纹理。 
 		*/
-		getTextures(): Texture2D;		
+		getTextures(): Texture2D[];
 		/**
 		!#en Set the texture.
 		!#zh 设置纹理。
