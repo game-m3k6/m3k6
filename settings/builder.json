@@ -1,8 +1,5 @@
 {
-  "excludeScenes": [
-    "369a3e6e-9df9-4d64-b799-b83dd2d05b3c",
-    "a3db1770-a55c-41fa-b927-077c29522169"
-  ],
+  "excludeScenes": [],
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,
@@ -10,12 +7,12 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "startScene": "a3db1770-a55c-41fa-b927-077c29522169",
   "title": "m3k6",
   "webOrientation": "auto",
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
+  "inlineSpriteFrames_native": false,
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
   "md5Cache": false,

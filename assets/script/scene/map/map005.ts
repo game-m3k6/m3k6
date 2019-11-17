@@ -1,5 +1,6 @@
 import EventType = cc.Node.EventType;
-import { MinterView } from '../../ui/minter';
+
+import { MinterView } from '../../ui/minter/minter-view';
 // import { TiledObject } from './models';
 
 const { ccclass, property } = cc._decorator;

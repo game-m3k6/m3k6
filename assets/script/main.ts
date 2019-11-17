@@ -2,7 +2,8 @@
 import EventType = cc.Node.EventType;
 
 import { GameScene } from './constants';
-import { hideNode, showMouseCursor, showNode } from './utils';
+import { hideNode, showNode } from './utils/node-utils';
+import { showMouseCursor } from './utils/show-mouse-cursor';
 
 const { ccclass, property } = cc._decorator;
 
@@ -31,8 +32,7 @@ export default class Main extends cc.Component {
   @property({ type: cc.AudioClip })
   moveAudio: cc.AudioClip = null;
 
-  start(): void {
-  }
+  start(): void {}
 
   onLoad(): void {
     this.version.string = 'v0.1.0';

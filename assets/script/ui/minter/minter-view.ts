@@ -1,7 +1,11 @@
-import { ZhugeDice12, ZhugeDice6, ZhugeDice9 } from '../../models';
-import { getRandomInt, hideMouseCursor, hideNode, showMouseCursor, showNode } from '../../utils';
-import { getDiceX } from './utils';
 import EventType = cc.Node.EventType;
+
+import { ZhugeDice12, ZhugeDice6, ZhugeDice9 } from '../../models/minter';
+import { getRandomInt } from '../../utils/get-random-int';
+import { hideMouseCursor } from '../../utils/hide-mouse-cursor';
+import { hideNode, showNode } from '../../utils/node-utils';
+import { showMouseCursor } from '../../utils/show-mouse-cursor';
+import { getDiceX } from './utils/get-dice-x';
 
 const { ccclass, property } = cc._decorator;
 
