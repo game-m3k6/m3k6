@@ -32,13 +32,14 @@ export default class Main extends cc.Component {
   moveAudio: cc.AudioClip = null;
 
   start(): void {
+  }
+
+  onLoad(): void {
     this.version.string = 'v0.1.0';
     this.initMenu();
     showMouseCursor();
     cc.audioEngine.playEffect(this.bgm, true);
   }
-
-  onLoad(): void {}
 
   private initMenu(): void {
     this.setEvent(this.exitHover);

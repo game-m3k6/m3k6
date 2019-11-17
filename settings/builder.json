@@ -1,5 +1,8 @@
 {
-  "excludeScenes": [],
+  "excludeScenes": [
+    "369a3e6e-9df9-4d64-b799-b83dd2d05b3c",
+    "a3db1770-a55c-41fa-b927-077c29522169"
+  ],
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,
@@ -27,7 +30,7 @@
     "packageName": "org.cocos2d.helloworld"
   },
   "mac": {
-    "packageName": "org.cocos2d.helloworld"
+    "packageName": "org.zlq4863947.m3k6"
   },
   "win32": {},
   "android-instant": {
@@ -39,5 +42,6 @@
     "scheme": "https",
     "skipRecord": false
   },
-  "appBundle": false
+  "appBundle": false,
+  "includeAnySDK": false
 }

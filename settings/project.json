@@ -8,7 +8,7 @@
   "group-list": [
     "default"
   ],
-  "start-scene": "a3db1770-a55c-41fa-b927-077c29522169",
+  "start-scene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
   "design-resolution-width": 960,
   "design-resolution-height": 640,
   "fit-width": false,
@@ -20,7 +20,7 @@
     "height": 640,
     "width": 960
   },
-  "last-module-event-record-time": 1573304933087,
+  "last-module-event-record-time": 1574001660667,
   "assets-sort-type": "name",
   "facebook": {
     "appID": "",

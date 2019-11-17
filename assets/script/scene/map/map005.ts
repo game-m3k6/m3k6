@@ -1,12 +1,31 @@
 import EventType = cc.Node.EventType;
+import { MinterView } from '../../ui/minter';
 // import { TiledObject } from './models';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Map005 extends cc.Component {
-  @property(cc.TiledMap)
-  tiledMap: cc.TiledMap = null;
+  @property({
+    type: cc.Node,
+    tooltip: '玩家控制器',
+  })
+  minterView: MinterView = null;
+  @property({
+    type: cc.Node,
+    tooltip: '道路图层',
+  })
+  road: cc.Node = null;
+  @property({
+    type: cc.Node,
+    tooltip: '城池图层',
+  })
+  cities: cc.Node = null;
+  @property({
+    type: cc.Camera,
+    tooltip: '玩家1视角',
+  })
+  p1Camera: cc.Camera = null;
 
   start(): void {
     // const node = new cc.Node('city Node');
@@ -20,14 +39,13 @@ export default class Map005 extends cc.Component {
     // const texture = cc.CCTextureCache.addImage("hello.png");
 
     // const citys = this.tiledMap.getObjectGroup('城池对象').getObjects();
-   /* const city = this.tiledMap.getObjectGroup('城池对象').getObject('朱崖城') as TiledObject;
+    /* const city = this.tiledMap.getObjectGroup('城池对象').getObject('朱崖城') as TiledObject;
     city.visible = false;
     const layer = this.tiledMap.getLayers()[0];
     layer.node.opacity = 0;
     layer.node.active = false;
     layer.getTextures()[0].destroy();*/
 
-    console.log(1)
     /*
     const node = new cc.Node('city Node');
     const sprite = node.addComponent(cc.Sprite);
@@ -55,5 +73,9 @@ export default class Map005 extends cc.Component {
       // console.log(this.tiledMap.getObjectGroups());
       // debugger
     });
+  }
+
+  protected onLoad(): void {
+    // this.cities = this.node.getComponents('005')
   }
 }
