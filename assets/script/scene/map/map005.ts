@@ -1,17 +1,25 @@
 import EventType = cc.Node.EventType;
 
+import { interval } from 'rxjs';
+
+import { log } from '../../common/logger';
 import { MinterView } from '../../ui/minter/minter-view';
+import { showNode } from '../../utils/node-utils';
+
 // import { TiledObject } from './models';
 
 const { ccclass, property } = cc._decorator;
 
+/**
+ * 交州之站地图
+ */
 @ccclass
 export default class Map005 extends cc.Component {
   @property({
     type: cc.Node,
     tooltip: '玩家控制器',
   })
-  minterView: MinterView = null;
+  minter: MinterView = null;
   @property({
     type: cc.Node,
     tooltip: '道路图层',
@@ -28,7 +36,12 @@ export default class Map005 extends cc.Component {
   })
   p1Camera: cc.Camera = null;
 
+  minterComp: MinterView;
+
   start(): void {
+    /*this.minterView.onDice$.subscribe((dice) => {
+      console.log(`获得结果: ${dice}`);
+    });*/
     // const node = new cc.Node('city Node');
     // const sprite = node.addComponent(cc.Sprite);
     // debugger
@@ -77,6 +90,17 @@ export default class Map005 extends cc.Component {
   }
 
   protected onLoad(): void {
+    this.minterComp = this.minter.getComponent('minter-view');
+    this.minterComp.onDice$.subscribe((dice) => {
+      console.log(`获得结果: ${dice}`);
+    });
+    this.minterComp.road = this.road;
     // this.cities = this.node.getComponents('005')
+    /*
+    interval(1000).subscribe((i) => {
+      this.label.string = i + '';
+      log(`label设置:${i}`, '标签赋值处理');
+    });*/
+    console.log(`map005 onLoad`);
   }
 }

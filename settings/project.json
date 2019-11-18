@@ -2,13 +2,17 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      true
     ]
   ],
   "excluded-modules": [],
   "group-list": [
-    "default"
+    "default",
+    "ui"
   ],
-  "start-scene": "a3db1770-a55c-41fa-b927-077c29522169",
   "design-resolution-width": 960,
   "design-resolution-height": 640,
   "fit-width": false,
@@ -31,5 +35,6 @@
     "live": {
       "enable": false
     }
-  }
+  },
+  "start-scene": "current"
 }

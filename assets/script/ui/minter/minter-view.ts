@@ -1,5 +1,8 @@
 import EventType = cc.Node.EventType;
 
+import { Subject } from 'rxjs';
+
+import { log } from '../../common/logger';
 import { ZhugeDice12, ZhugeDice6, ZhugeDice9 } from '../../models/minter';
 import { getRandomInt } from '../../utils/get-random-int';
 import { hideMouseCursor } from '../../utils/hide-mouse-cursor';
@@ -9,6 +12,9 @@ import { getDiceX } from './utils/get-dice-x';
 
 const { ccclass, property } = cc._decorator;
 
+/**
+ * 行为控制器
+ */
 @ccclass
 export class MinterView extends cc.Component {
   @property({
@@ -62,6 +68,11 @@ export class MinterView extends cc.Component {
   // 是否禁用事件
   enabled = true;
   state: ZhugeDice6 | ZhugeDice9 | ZhugeDice12;
+  // 道路
+  road: cc.Node;
+
+  // 骰子事件
+  readonly onDice$ = new Subject<number>();
 
   constructor() {
     super();
@@ -72,7 +83,9 @@ export class MinterView extends cc.Component {
   }
 
   start(): void {
-    this.setClickEvents([this.dice6Clicked, this.dice9Clicked, this.dice12Clicked]);
+    // 初始化诸葛算珠动作事件
+    [this.dice6Clicked, this.dice9Clicked, this.dice12Clicked].forEach((el) => this.initActionEvent(el));
+    // 显示默认鼠标样式
     showMouseCursor();
   }
 
@@ -82,28 +95,21 @@ export class MinterView extends cc.Component {
   }
 
   onLoad(): void {
-    console.log('onLoad');
-    this.load({
+    this.loadStatus({
       max: 9,
       dice: 6,
     });
-    /*setTimeout(() => {
-      this.load({
-        max: 12,
-        dice: 7,
-      });
-    }, 1000);*/
   }
 
   /**
-   * 加载骰子控制器
+   * 加载骰子控制器状态
    * @param minter
    */
-  load(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12): void {
+  loadStatus(minter: ZhugeDice6 | ZhugeDice9 | ZhugeDice12): void {
+    log({ msg: '加载行为控制器状态', channel: '行为控制器', data: minter });
     const fn = () => {
       this.state = minter;
       this.dice.x = this.getDiceX(this.state.dice);
-      // this.dice.setPosition(cc.v2(this.getDiceX(this.state.dice), this.dice.y));
       switch (minter.max) {
         case 6: {
           showNode([this.dice6Ind]);
@@ -140,44 +146,53 @@ export class MinterView extends cc.Component {
     return getDiceX(this.dice6Ind.x, diceNum);
   }
 
-  private setClickEvents(elList: cc.Node[]): void {
-    elList.forEach((el) => this.setClickEvent(el));
-  }
-
   /**
    * 设置算珠点击事件
    * @param el 算珠元素
    */
-  private setClickEvent(el: cc.Node): void {
-    el.on(EventType.MOUSE_UP, () => {
+  private initActionEvent(el: cc.Node): void {
+    // 注册鼠标释放事件
+    el.on(EventType.MOUSE_UP, async () => {
+      // 算珠不可用时，不继续执行
       if (!this.enabled) {
         return;
       }
+
+      let maxNum;
       switch (el) {
         case this.dice6Clicked: {
+          maxNum = 6;
+          // 隐藏按下图片
           hideNode(this.dice6Clicked);
-          this.diceAction(6);
           break;
         }
         case this.dice9Clicked: {
           if (this.state.max >= 9) {
+            maxNum = 9;
             hideNode(this.dice9Clicked);
-            this.diceAction(9);
           }
           break;
         }
         case this.dice12Clicked: {
           if (this.state.max === 12) {
+            maxNum = 12;
             hideNode(this.dice12Clicked);
-            this.diceAction(12);
           }
           break;
         }
         default: {
         }
       }
+
+      if (maxNum) {
+        // 执行摇骰子动作
+        const diceNum = await this.diceAction(maxNum);
+        log({ msg: `掷骰子结果:${diceNum}`, channel: '行为控制器', data: { node: el.name } });
+        this.onDice$.next(diceNum);
+      }
     });
 
+    // 注册鼠标按下事件
     el.on(EventType.MOUSE_DOWN, () => {
       if (!this.enabled) {
         return;
@@ -203,29 +218,43 @@ export class MinterView extends cc.Component {
         }
       }
     });
+
+    // 注册鼠标进入事件
+    el.on(EventType.MOUSE_ENTER, () => {
+      if (el === this.dice6Clicked || el === this.dice9Clicked || el === this.dice12Clicked) {
+        showNode(this.road);
+      }
+    });
+    // 注册鼠标离开事件
+    el.on(EventType.MOUSE_LEAVE, () => {
+      if (el === this.dice6Clicked || el === this.dice9Clicked || el === this.dice12Clicked) {
+        hideNode(this.road);
+      }
+    });
   }
 
   /**
-   * 摇骰子
+   * 执行摇骰子动作、并返回骰子数
    * @param max 骰子最大值
    * @return 骰子数
    */
-  private diceAction(max: number): number {
-    const callback = cc.callFunc(() => {
-      this.enabled = true;
-      showMouseCursor();
+  private async diceAction(max: number): Promise<number> {
+    return new Promise((resolve) => {
+      const diceNum = getRandomInt(1, max);
+      const callback = cc.callFunc(() => {
+        this.enabled = true;
+        showMouseCursor();
+        resolve(diceNum);
+      });
+
+      const push = cc.moveTo(0.5, this.getDiceX(max), this.dice.y);
+      const pull = cc.moveTo(0.5, this.getDiceX(1), this.dice.y);
+      const diceX = this.getDiceX(diceNum);
+      const target = cc.moveTo(0.5, diceX, this.dice.y);
+      const seq = cc.sequence(push, pull, target, callback); // .easing(cc.easeOut(2));
+      this.dice.runAction(cc.speed(seq, 2));
+      hideMouseCursor();
+      this.enabled = false;
     });
-
-    const push = cc.moveTo(0.5, this.getDiceX(max), this.dice.y);
-    const pull = cc.moveTo(0.5, this.getDiceX(1), this.dice.y);
-    const diceNum = getRandomInt(1, max);
-    const diceX = this.getDiceX(diceNum);
-    const target = cc.moveTo(0.5, diceX, this.dice.y);
-    const seq = cc.sequence(push, pull, target, callback); // .easing(cc.easeOut(2));
-    this.dice.runAction(cc.speed(seq, 2));
-    hideMouseCursor();
-    this.enabled = false;
-
-    return diceNum;
   }
 }

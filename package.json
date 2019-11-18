@@ -41,5 +41,9 @@
     "typescript": "3.3.3333",
     "vrsource-tslint-rules": "^6.0.0",
     "yarn": "^1.19.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.8.17",
+    "rxjs": "^6.5.3"
   }
 }
