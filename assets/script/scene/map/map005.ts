@@ -4,6 +4,7 @@ import { interval } from 'rxjs';
 
 import { log } from '../../common/logger';
 import { MinterView } from '../../ui/minter/minter-view';
+import { loadRes } from '../../utils/load-res';
 import { showNode } from '../../utils/node-utils';
 
 // import { TiledObject } from './models';
@@ -35,6 +36,11 @@ export default class Map005 extends cc.Component {
     tooltip: '玩家1视角',
   })
   p1Camera: cc.Camera = null;
+  @property({
+    type: cc.Sprite,
+    tooltip: '玩家1图集',
+  })
+  p1Atlas: cc.Sprite = null;
 
   minterComp: MinterView;
 
@@ -89,12 +95,47 @@ export default class Map005 extends cc.Component {
     });
   }
 
-  protected onLoad(): void {
+  protected async onLoad(): Promise<void> {
     this.minterComp = this.minter.getComponent('minter-view');
     this.minterComp.onDice$.subscribe((dice) => {
       console.log(`获得结果: ${dice}`);
     });
     this.minterComp.road = this.road;
+
+    /* const node = new cc.Node('P1');
+    const sprite = node.addComponent(cc.Sprite);
+    node.parent = this.p1Camera.node;
+    const atlas = await loadRes<cc.SpriteAtlas>('master000/master000', cc.SpriteAtlas);
+    sprite.spriteFrame = atlas.getSpriteFrame('1-1');
+
+    const clip = await loadRes<cc.AnimationClip>('master000/left');
+    sprite.addComponent(cc.Animation);
+
+    const animation = sprite.getComponent(cc.Animation);
+    clip.wrapMode = cc.WrapMode.Loop;
+    animation.addClip(clip);
+    animation.play('left');*/
+    //
+
+    // debugger
+
+    // debugger
+    /*
+    const node = new cc.Node('city Node');
+    const sprite = node.addComponent(cc.Sprite);
+    node.parent = this.p1Camera.node;
+    sprite.spriteFrame = this.p1Atlas.getSpriteFrame('1-1');*/
+    /*
+    cc.loader.loadRes('master000/master000', cc.SpriteAtlas, (err: Error, atlas) => {
+      if (err) {
+        console.log(err.message);
+        return;
+      }
+      sprite.spriteFrame = atlas.getSpriteFrame('1-1');
+    });*/
+    /*
+    const animation = new cc.Animation();
+    animation.*/
     // this.cities = this.node.getComponents('005')
     /*
     interval(1000).subscribe((i) => {
