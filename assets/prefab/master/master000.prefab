@@ -1,0 +1,164 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "master000",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 56,
+      "height": 118
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float32Array",
+      "array": [
+        -75.97100067138672,
+        -91.02200317382812,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "7ba4990d-ca6b-4637-b46b-90d5eec8cff6"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": {
+      "__uuid__": "cdd0144b-84a0-4ba4-99d6-0f485b7dcf22"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_defaultClip": {
+      "__uuid__": "e133ec82-5a0f-4d5f-8688-38b636e7ed81"
+    },
+    "_clips": [
+      {
+        "__uuid__": "892b186d-2605-44db-bdcc-b78c049e74b0"
+      },
+      {
+        "__uuid__": "58f3c297-e2e7-4309-8064-dfb1d4a279c1"
+      },
+      {
+        "__uuid__": "08a6e097-eb83-4074-a393-827f5d9e6c4d"
+      },
+      {
+        "__uuid__": "4e66230b-123d-41a8-83cd-b0a14bcebd3d"
+      },
+      {
+        "__uuid__": "34fe9602-953f-47ad-9194-5ccd1054a091"
+      },
+      {
+        "__uuid__": "7b387bba-8326-4649-a6ab-81085acc3853"
+      },
+      {
+        "__uuid__": "e133ec82-5a0f-4d5f-8688-38b636e7ed81"
+      },
+      {
+        "__uuid__": "a48c6fd4-c6d6-429a-b39f-bc52d6e3a33b"
+      }
+    ],
+    "playOnLoad": true,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "79c873eb-7a04-454c-8a6d-91d70dafd111"
+    },
+    "fileId": "aeog/LIrVGWZoJXPF7EzFH",
+    "sync": false
+  }
+]

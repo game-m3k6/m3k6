@@ -33,14 +33,19 @@ export default class Map005 extends cc.Component {
   cities: cc.Node = null;
   @property({
     type: cc.Camera,
+    tooltip: '主视角',
+  })
+  mainCamera: cc.Camera = null;
+  @property({
+    type: cc.Camera,
     tooltip: '玩家1视角',
   })
   p1Camera: cc.Camera = null;
   @property({
-    type: cc.Sprite,
-    tooltip: '玩家1图集',
+    type: cc.Node,
+    tooltip: '玩家1',
   })
-  p1Atlas: cc.Sprite = null;
+  player1: cc.Node = null;
 
   minterComp: MinterView;
 
@@ -101,6 +106,8 @@ export default class Map005 extends cc.Component {
       console.log(`获得结果: ${dice}`);
     });
     this.minterComp.road = this.road;
+
+    this.mainCamera.node.x = this.player1.x;
 
     /* const node = new cc.Node('P1');
     const sprite = node.addComponent(cc.Sprite);
