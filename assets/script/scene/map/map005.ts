@@ -106,8 +106,19 @@ export default class Map005 extends cc.Component {
       console.log(`获得结果: ${dice}`);
     });
     this.minterComp.road = this.road;
-
-    this.mainCamera.node.x = this.player1.x;
+    const posi = this.road.children[0].children[8].getPosition();
+    posi.y = posi.y + 10;
+    this.player1.setPosition(posi);
+    this.mainCamera.node.setPosition(this.road.children[0].children[5].getPosition());
+    /*setTimeout(() => {
+      console.log('run...');
+      const targetPosi = this.road.children[0].children[1].getPosition();
+      targetPosi.y = targetPosi.y + 10;
+      const t = cc.moveTo(1, targetPosi.x, targetPosi.y);
+      this.player1.runAction(t);
+    }, 1000);*/
+    // this.mainCamera.node
+    // this.mainCamera.node.x = this.player1.x;
 
     /* const node = new cc.Node('P1');
     const sprite = node.addComponent(cc.Sprite);

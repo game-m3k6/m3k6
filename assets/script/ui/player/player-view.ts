@@ -1,24 +1,26 @@
 import { ZhugeDice } from '../../models/minter';
 import { IPlayer } from './player.interface';
+import {Direction} from "../../models/road";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class PlayerView extends cc.Component implements IPlayer {
-  @property({
-    type: cc.Animation,
-    tooltip: '角色站立效果',
-  })
-  left: cc.Animation = null;
 
-  // LIFE-CYCLE CALLBACKS:
+  animationComp: cc.Animation;
 
-  // onLoad () {}
-
-  start() {}
-
+  direction: Direction;
   dice: ZhugeDice;
   name: string;
+
+  onLoad () {
+    this.animationComp = this.getComponent(cc.Animation);
+    console.log(2)
+  }
+
+  start() {
+    console.log(1)
+  }
 
   moveDown(moveSize: number): void {}
 
