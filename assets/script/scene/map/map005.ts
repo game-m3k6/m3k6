@@ -120,7 +120,7 @@ export default class Map005 extends cc.Component {
     // 初始化玩家组件
     this.playerComp = this.player1.getComponent('player-view');
     this.playerComp.mapRoad = this.mapRoad;
-    this.playerComp.setPosition(this.mapRoad.roadNodes[1]);
+    this.playerComp.setPosition(this.mapRoad.roadNodes[6]);
     /*setTimeout(() => {
       console.log('run...');
       const targetPosi = this.road.children[0].children[1]d.getPosition();

@@ -41,3 +41,15 @@ export interface MapRoad {
   root: cc.Node;
   roadNodes: RoadNode[];
 }
+
+/**
+ *  路径节点
+ */
+export interface RouteNode {
+  // 是否寻路结束
+  finish?: boolean;
+  // 寻路节点（遇到转弯时，为转弯节点）
+  node: RoadNode;
+  // 剩余点数（只在为完成寻路时有用）
+  remainingDice: number;
+}

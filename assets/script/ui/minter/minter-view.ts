@@ -96,7 +96,7 @@ export class MinterView extends cc.Component {
 
   onLoad(): void {
     this.loadStatus({
-      max: 9,
+      max: 12,
       dice: 6,
     });
   }

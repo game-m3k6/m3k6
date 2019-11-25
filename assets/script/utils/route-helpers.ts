@@ -1,21 +1,9 @@
 import { PlayerState } from '../models/player';
-import { MapRoad, RoadNode } from '../models/road';
+import { MapRoad, RoadNode, RouteNode } from '../models/road';
 
 function getNextRoadNode(next: boolean, current: RoadNode, mapRoad: MapRoad): RoadNode {
   const nextNodeName = next ? current.next : current.previous;
   return mapRoad.roadNodes.find((o) => o.name === nextNodeName);
-}
-
-/**
- *  路径节点
- */
-interface RouteNode {
-  // 是否寻路结束
-  finish?: boolean;
-  // 寻路节点（遇到转弯时，为转弯节点）
-  node: RoadNode;
-  // 剩余点数（只在为完成寻路时有用）
-  remainingDice: number;
 }
 
 /**
@@ -52,13 +40,13 @@ export function getStraightRoadNode(diceNum: number, position: RoadNode, walkDes
  * @param playerState 角色状态
  * @param mapRoad 地图
  */
-export function getWalkRouteLine(diceNum: number, playerState: PlayerState, mapRoad: MapRoad): RoadNode[] {
+export function getWalkRouteLine(diceNum: number, playerState: PlayerState, mapRoad: MapRoad): RouteNode[] {
   let routeNode = getStraightRoadNode(diceNum, playerState.position, playerState.walkDesc, mapRoad);
-  const roadNodes = [routeNode.node];
+  const routeNodes = [routeNode];
   while (!routeNode.finish) {
     routeNode = getStraightRoadNode(routeNode.remainingDice, routeNode.node, playerState.walkDesc, mapRoad);
-    roadNodes.push(routeNode.node);
+    routeNodes.push(routeNode);
   }
 
-  return roadNodes;
+  return routeNodes;
 }
