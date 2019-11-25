@@ -1,13 +1,11 @@
 /**
  * 游戏角色组件接口
  */
-import { ZhugeDice } from '../../models/minter';
+import { PlayerState } from '../../models/player';
 
 export interface IPlayer {
-  // 角色名称
-  name: string;
-  // 移动算珠
-  dice: ZhugeDice;
+  // 角色状态
+  state: PlayerState;
   // 说话
   talk(msg: string): void;
   // 上移

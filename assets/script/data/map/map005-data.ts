@@ -54,6 +54,7 @@ export const map005Road: RoadNode[] = [
     next: '01/01-10',
     previous: '01/01-08',
     supportDirection: [Direction.TopRight, Direction.BottomRight],
+    turn: true,
   },
   {
     name: '01/01-10',
@@ -108,6 +109,7 @@ export const map005Road: RoadNode[] = [
     next: '02/02-01',
     previous: '01/01-17',
     supportDirection: [Direction.BottomLeft, Direction.BottomRight],
+    turn: true,
   },
   {
     name: '02/02-01',
@@ -150,6 +152,7 @@ export const map005Road: RoadNode[] = [
     next: '03/03-02',
     previous: '02/02-06',
     supportDirection: [Direction.TopLeft, Direction.TopRight],
+    turn: true,
   },
   {
     name: '03/03-02',
@@ -204,6 +207,7 @@ export const map005Road: RoadNode[] = [
     next: '05/05-02',
     previous: '04/04-04',
     supportDirection: [Direction.TopLeft, Direction.TopRight, Direction.BottomLeft],
+    turn: true,
     variable: true,
   },
   {
@@ -265,6 +269,7 @@ export const map005Road: RoadNode[] = [
     next: '06/06-01',
     previous: '05/05-10',
     supportDirection: [Direction.BottomLeft, Direction.BottomRight],
+    turn: true,
   },
   {
     name: '06/06-01',
@@ -337,6 +342,7 @@ export const map005Road: RoadNode[] = [
     next: '06/06-13',
     previous: '06/06-11',
     supportDirection: [Direction.BottomLeft, Direction.TopLeft],
+    turn: true,
   },
   {
     name: '06/06-13',
@@ -397,6 +403,7 @@ export const map005Road: RoadNode[] = [
     next: '06/06-23',
     previous: '06/06-21',
     supportDirection: [Direction.TopLeft, Direction.TopRight],
+    turn: true,
   },
   {
     name: '06/06-23',
@@ -445,6 +452,7 @@ export const map005Road: RoadNode[] = [
     next: '08/08-01',
     previous: '07/07-04',
     supportDirection: [Direction.BottomLeft, Direction.BottomRight],
+    turn: true,
   },
   {
     name: '08/08-01',
@@ -481,6 +489,7 @@ export const map005Road: RoadNode[] = [
     next: '09/09-02',
     previous: '08/08-05',
     supportDirection: [Direction.TopLeft, Direction.TopRight],
+    turn: true,
   },
   {
     name: '09/09-02',
@@ -505,6 +514,7 @@ export const map005Road: RoadNode[] = [
     next: '10/10-02',
     previous: '09/09-04',
     supportDirection: [Direction.BottomLeft, Direction.TopRight, Direction.BottomRight],
+    turn: true,
     variable: true,
   },
   {
@@ -578,6 +588,7 @@ export const map005Road: RoadNode[] = [
     next: '11/11-08',
     previous: '11/11-06',
     supportDirection: [Direction.TopLeft, Direction.TopRight],
+    turn: true,
   },
   {
     name: '11/11-08',

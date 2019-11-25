@@ -8,7 +8,7 @@ import { getRandomInt } from '../../utils/get-random-int';
 import { hideMouseCursor } from '../../utils/hide-mouse-cursor';
 import { hideNode, showNode } from '../../utils/node-utils';
 import { showMouseCursor } from '../../utils/show-mouse-cursor';
-import { getDiceX } from './utils/get-dice-x';
+import { getDiceX } from './internat/get-dice-x';
 
 const { ccclass, property } = cc._decorator;
 
@@ -69,7 +69,7 @@ export class MinterView extends cc.Component {
   enabled = true;
   state: ZhugeDice;
   // 道路
-  road: cc.Node;
+  roadRootNode: cc.Node;
 
   // 骰子事件
   readonly onDice$ = new Subject<number>();
@@ -232,13 +232,13 @@ export class MinterView extends cc.Component {
     // 注册鼠标进入事件
     el.on(EventType.MOUSE_ENTER, () => {
       if (el === this.dice6Clicked || el === this.dice9Clicked || el === this.dice12Clicked) {
-        showNode(this.road);
+        showNode(this.roadRootNode);
       }
     });
     // 注册鼠标离开事件
     el.on(EventType.MOUSE_LEAVE, () => {
       if (el === this.dice6Clicked || el === this.dice9Clicked || el === this.dice12Clicked) {
-        hideNode(this.road);
+        hideNode(this.roadRootNode);
       }
     });
   }

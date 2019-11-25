@@ -5,8 +5,8 @@
   "scripts": {
     "deploy": "git subtree push --prefix public/web-desktop origin gh-pages",
     "format": "yarn format:ts",
-    "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write 'assets/script/**/*.ts'",
-    "format:ts:import": "import-sort --write 'assets/script/**/*.ts'",
+    "format:ts": "yarn format:ts:import && prettier --config .prettierrc --write '{assets/script,test}/**/*.ts'",
+    "format:ts:import": "import-sort --write '{assets/script,test}/**/*.ts'",
     "jest": "jest -c jest.config.js",
     "lint": "yarn lint:ts",
     "lint:ts": "tslint -p tsconfig.app.json -c tslint.json",

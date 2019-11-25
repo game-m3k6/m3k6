@@ -1,13 +1,9 @@
 import EventType = cc.Node.EventType;
 
-import { interval } from 'rxjs';
-
-import { log } from '../../common/logger';
+import { map005Road } from '../../data/map/map005-data';
+import { MapRoad } from '../../models/road';
 import { MinterView } from '../../ui/minter/minter-view';
-import { loadRes } from '../../utils/load-res';
-import { showNode } from '../../utils/node-utils';
-
-// import { TiledObject } from './models';
+import PlayerView from '../../ui/player/player-view';
 
 const { ccclass, property } = cc._decorator;
 
@@ -47,7 +43,9 @@ export default class Map005 extends cc.Component {
   })
   player1: cc.Node = null;
 
+  mapRoad: MapRoad;
   minterComp: MinterView;
+  playerComp: PlayerView;
 
   start(): void {
     /*this.minterView.onDice$.subscribe((dice) => {
@@ -100,19 +98,32 @@ export default class Map005 extends cc.Component {
     });
   }
 
+  protected update(dt: number): void {
+    this.mainCamera.node.setPosition(this.playerComp.node.getPosition());
+  }
+
   protected async onLoad(): Promise<void> {
+    // 初始化道路节点
+    this.mapRoad = {
+      root: this.road,
+      roadNodes: map005Road,
+    };
+
+    // 初始化控制器组件
     this.minterComp = this.minter.getComponent('minter-view');
     this.minterComp.onDice$.subscribe((dice) => {
       console.log(`获得结果: ${dice}`);
+      this.playerComp.walk(dice);
     });
-    this.minterComp.road = this.road;
-    const posi = this.road.children[0].children[8].getPosition();
-    posi.y = posi.y + 10;
-    this.player1.setPosition(posi);
-    this.mainCamera.node.setPosition(this.road.children[0].children[5].getPosition());
+    this.minterComp.roadRootNode = this.mapRoad.root;
+
+    // 初始化玩家组件
+    this.playerComp = this.player1.getComponent('player-view');
+    this.playerComp.mapRoad = this.mapRoad;
+    this.playerComp.setPosition(this.mapRoad.roadNodes[1]);
     /*setTimeout(() => {
       console.log('run...');
-      const targetPosi = this.road.children[0].children[1].getPosition();
+      const targetPosi = this.road.children[0].children[1]d.getPosition();
       targetPosi.y = targetPosi.y + 10;
       const t = cc.moveTo(1, targetPosi.x, targetPosi.y);
       this.player1.runAction(t);
@@ -160,6 +171,6 @@ export default class Map005 extends cc.Component {
       this.label.string = i + '';
       log(`label设置:${i}`, '标签赋值处理');
     });*/
-    console.log(`map005 onLoad`);
+    // console.log(`map005 onLoad`);
   }
 }
