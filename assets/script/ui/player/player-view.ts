@@ -1,6 +1,6 @@
 import { log } from '../../common/logger';
 import { PlayerState } from '../../models/player';
-import {Direction, MapRoad, RoadNode, RouteNode, WalkDirection} from '../../models/road';
+import { Direction, MapRoad, RoadNode, RouteNode, WalkDirection } from '../../models/road';
 import { getWalkRouteLine } from '../../utils/route-helpers';
 import { IPlayer } from './player.interface';
 import ActionInterval = cc.ActionInterval;
@@ -91,7 +91,7 @@ export default class PlayerView extends cc.Component implements IPlayer {
     for (const routeNode of routeNodes) {
       const roadNode = this.findRoadCcNode(routeNode.node.name);
       this.setWalkDirection();
-      const walkAction = cc.moveTo(1, roadNode.getPosition());
+      const walkAction = cc.moveTo(routeNode.duration, roadNode.getPosition());
       const cb = cc.callFunc(() => {
         log({ msg: `走完当前路径`, channel: '角色控制器', data: { routeNode } });
         this.state.position = routeNode.node;

@@ -50,6 +50,8 @@ export interface RouteNode {
   finish?: boolean;
   // 寻路节点（遇到转弯时，为转弯节点）
   node: RoadNode;
+  // 持续时间（秒）
+  duration: number;
   // 剩余点数（只在为完成寻路时有用）
   remainingDice: number;
 }

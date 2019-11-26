@@ -16,10 +16,11 @@ function getNextRoadNode(next: boolean, current: RoadNode, mapRoad: MapRoad): Ro
  */
 export function getStraightRoadNode(diceNum: number, position: RoadNode, walkDesc: boolean, mapRoad: MapRoad): RouteNode {
   let node = position;
-  const routeNode: RouteNode = { node, remainingDice: diceNum };
+  const routeNode: RouteNode = { node, remainingDice: diceNum, duration: 0 };
 
   for (let i = 0; i < diceNum; i++) {
     routeNode.remainingDice -= 1;
+    routeNode.duration += 0.1;
     routeNode.node = getNextRoadNode(!walkDesc, routeNode.node, mapRoad);
     // 是否为终点
     if (i === diceNum - 1) {
