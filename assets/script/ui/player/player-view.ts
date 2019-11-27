@@ -1,7 +1,8 @@
 import { log } from '../../common/logger';
 import { PlayerState } from '../../models/player';
-import { Direction, MapRoad, RoadNode, RouteNode, WalkDirection } from '../../models/road';
+import { Direction, RoadNode, RouteNode, WalkDirection } from '../../models/road';
 import { getWalkRouteLine } from '../../utils/route-helpers';
+import RoadView from '../road-view';
 import { IPlayer } from './player.interface';
 import ActionInterval = cc.ActionInterval;
 import ActionInstant = cc.ActionInstant;
@@ -12,14 +13,14 @@ const { ccclass, property } = cc._decorator;
 export default class PlayerView extends cc.Component implements IPlayer {
   animationComp: cc.Animation;
   state: PlayerState = {} as any;
-
+  // 角色方向
+  direction: Direction;
   // 道路
-  mapRoad: MapRoad;
+  mapRoad: RoadView;
 
   onLoad() {
-    this.state.name = '曹操';
     this.animationComp = this.getComponent(cc.Animation);
-    this.setDirection();
+
     /*setTimeout(() => {
       this.walk(1);
     }, 1000);*/
@@ -27,17 +28,25 @@ export default class PlayerView extends cc.Component implements IPlayer {
 
   start() {}
 
+  init(opts: { state: PlayerState; mapRoad: RoadView }): void {
+    log({ msg: `初始化角色`, channel: '角色控制器', data: opts.state });
+    this.state = opts.state;
+    this.mapRoad = opts.mapRoad;
+    this.setPosition(opts.state.position);
+    this.setDirection();
+  }
+
   /**
    * 设置朝向
    * @param direction
    */
   setDirection(direction?: Direction) {
-    this.state.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
-    const direc = direction ? direction : this.state.direction;
+    this.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
+    const direc = direction ? direction : this.direction;
     const direcClip = this.animationComp.getClips().find((c) => c.name === direc);
     if (direcClip) {
       log({ msg: `(${this.state.name})设置方向: ${direc}`, channel: '角色控制器' });
-      this.state.direction = direc;
+      this.direction = direc;
       this.animationComp.play(direcClip.name);
     }
   }
@@ -47,8 +56,8 @@ export default class PlayerView extends cc.Component implements IPlayer {
    * @param direction
    */
   setWalkDirection(direction?: Direction) {
-    this.state.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
-    const direc = direction ? direction : this.state.direction;
+    this.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
+    const direc = direction ? direction : this.direction;
     const walkDirection = `walk-${direc}` as WalkDirection;
     const direcClip = this.animationComp.getClips().find((c) => c.name === walkDirection);
     if (direcClip) {
@@ -60,20 +69,12 @@ export default class PlayerView extends cc.Component implements IPlayer {
   /**
    * 设置位置
    * @param node 道路节点
-   * @param direc 角色方向（可选）
    */
-  setPosition(node: RoadNode, direc?: Direction) {
-    log({ msg: `设置位置`, channel: '角色控制器', data: { node, direc } });
-    const roadNode = this.findRoadCcNode(node.name);
-    if (!direc) {
-      this.state.direction = node.supportDirection[1];
-    }
+  setPosition(node: RoadNode) {
+    log({ msg: `设置位置`, channel: '角色控制器', data: { node } });
+    const roadNode = this.mapRoad.findRoadCcNode(node.name);
     this.state.position = node;
     this.node.setPosition(roadNode.getPosition());
-  }
-
-  findRoadCcNode(roadName: string): cc.Node {
-    return cc.find(roadName, this.mapRoad.root);
   }
 
   /**
@@ -89,7 +90,7 @@ export default class PlayerView extends cc.Component implements IPlayer {
   private doWalkAction(routeNodes: RouteNode[]): void {
     const actions: (ActionInterval | ActionInstant)[] = [];
     for (const routeNode of routeNodes) {
-      const roadNode = this.findRoadCcNode(routeNode.node.name);
+      const roadNode = this.mapRoad.findRoadCcNode(routeNode.node.name);
       this.setWalkDirection();
       const walkAction = cc.moveTo(routeNode.duration, roadNode.getPosition());
       const cb = cc.callFunc(() => {

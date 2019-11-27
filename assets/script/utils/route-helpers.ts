@@ -1,7 +1,9 @@
 import { PlayerState } from '../models/player';
-import { MapRoad, RoadNode, RouteNode } from '../models/road';
+import { RoadNode, RouteNode } from '../models/road';
+import RoadView from '../ui/road-view';
+import { formatNumber } from './number-helpers';
 
-function getNextRoadNode(next: boolean, current: RoadNode, mapRoad: MapRoad): RoadNode {
+function getNextRoadNode(next: boolean, current: RoadNode, mapRoad: RoadView): RoadNode {
   const nextNodeName = next ? current.next : current.previous;
   return mapRoad.roadNodes.find((o) => o.name === nextNodeName);
 }
@@ -14,13 +16,13 @@ function getNextRoadNode(next: boolean, current: RoadNode, mapRoad: MapRoad): Ro
  * @param walkDesc
  * @param mapRoad 地图
  */
-export function getStraightRoadNode(diceNum: number, position: RoadNode, walkDesc: boolean, mapRoad: MapRoad): RouteNode {
+export function getStraightRoadNode(diceNum: number, position: RoadNode, walkDesc: boolean, mapRoad: RoadView): RouteNode {
   let node = position;
   const routeNode: RouteNode = { node, remainingDice: diceNum, duration: 0 };
 
   for (let i = 0; i < diceNum; i++) {
     routeNode.remainingDice -= 1;
-    routeNode.duration += 0.1;
+    routeNode.duration = formatNumber(routeNode.duration + 0.1);
     routeNode.node = getNextRoadNode(!walkDesc, routeNode.node, mapRoad);
     // 是否为终点
     if (i === diceNum - 1) {
@@ -41,7 +43,7 @@ export function getStraightRoadNode(diceNum: number, position: RoadNode, walkDes
  * @param playerState 角色状态
  * @param mapRoad 地图
  */
-export function getWalkRouteLine(diceNum: number, playerState: PlayerState, mapRoad: MapRoad): RouteNode[] {
+export function getWalkRouteLine(diceNum: number, playerState: PlayerState, mapRoad: RoadView): RouteNode[] {
   let routeNode = getStraightRoadNode(diceNum, playerState.position, playerState.walkDesc, mapRoad);
   const routeNodes = [routeNode];
   while (!routeNode.finish) {

@@ -1,9 +1,9 @@
 import EventType = cc.Node.EventType;
 
 import { map005Road } from '../../data/map/map005-data';
-import { MapRoad } from '../../models/road';
 import { MinterView } from '../../ui/minter/minter-view';
 import PlayerView from '../../ui/player/player-view';
+import RoadView from '../../ui/road-view';
 
 const { ccclass, property } = cc._decorator;
 
@@ -21,7 +21,7 @@ export default class Map005 extends cc.Component {
     type: cc.Node,
     tooltip: '道路图层',
   })
-  road: cc.Node = null;
+  road: RoadView = null;
   @property({
     type: cc.Node,
     tooltip: '城池图层',
@@ -43,11 +43,36 @@ export default class Map005 extends cc.Component {
   })
   player1: cc.Node = null;
 
-  mapRoad: MapRoad;
   minterComp: MinterView;
   playerComp: PlayerView;
+  roadComp: RoadView;
 
   start(): void {
+    // 初始化道路组件
+    this.roadComp = this.road.getComponent('road-view');
+    this.roadComp.init(map005Road);
+
+    // 初始化玩家组件
+    this.playerComp = this.player1.getComponent('player-view');
+    const initName = '10/10-04'; // '11/11-03'
+    this.playerComp.init({
+      state: {
+        name: '曹操',
+        dice: { max: 12, dice: 6 },
+        diceNum: 5,
+        position: this.roadComp.getRoadNode(initName),
+        walkDesc: true,
+      },
+      mapRoad: this.roadComp,
+    });
+
+    // 初始化控制器组件
+    this.minterComp = this.minter.getComponent('minter-view');
+    this.minterComp.onDice$.subscribe((dice) => {
+      console.log(`获得结果: ${dice}`);
+      this.playerComp.walk(dice);
+    });
+    this.minterComp.mapRoad = this.roadComp;
     /*this.minterView.onDice$.subscribe((dice) => {
       console.log(`获得结果: ${dice}`);
     });*/
@@ -103,24 +128,6 @@ export default class Map005 extends cc.Component {
   }
 
   protected async onLoad(): Promise<void> {
-    // 初始化道路节点
-    this.mapRoad = {
-      root: this.road,
-      roadNodes: map005Road,
-    };
-
-    // 初始化控制器组件
-    this.minterComp = this.minter.getComponent('minter-view');
-    this.minterComp.onDice$.subscribe((dice) => {
-      console.log(`获得结果: ${dice}`);
-      this.playerComp.walk(dice);
-    });
-    this.minterComp.roadRootNode = this.mapRoad.root;
-
-    // 初始化玩家组件
-    this.playerComp = this.player1.getComponent('player-view');
-    this.playerComp.mapRoad = this.mapRoad;
-    this.playerComp.setPosition(this.mapRoad.roadNodes[6]);
     /*setTimeout(() => {
       console.log('run...');
       const targetPosi = this.road.children[0].children[1]d.getPosition();
@@ -130,7 +137,6 @@ export default class Map005 extends cc.Component {
     }, 1000);*/
     // this.mainCamera.node
     // this.mainCamera.node.x = this.player1.x;
-
     /* const node = new cc.Node('P1');
     const sprite = node.addComponent(cc.Sprite);
     node.parent = this.p1Camera.node;
@@ -145,9 +151,7 @@ export default class Map005 extends cc.Component {
     animation.addClip(clip);
     animation.play('left');*/
     //
-
     // debugger
-
     // debugger
     /*
     const node = new cc.Node('city Node');

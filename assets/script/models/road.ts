@@ -22,14 +22,20 @@ export enum WalkDirection {
   BottomRight = 'walk-bottom-right',
 }
 
+// 道路节点
 export interface RoadNode {
   // 道路节点名称
   name: string;
-  // 下一个节点名称
-  next: string;
   // 前一个节点名称
   previous: string;
-  // 支持的方向列表
+  // 下一个节点名称
+  next: string;
+  /**
+   * 支持的方向列表
+   *  第一个元素为前一个节点名称
+   *  第一个元素为下一个节点名称
+   *  第三、四个元素为可变节点名称（可选项）
+   */
   supportDirection: Direction[];
   // 转弯
   turn?: true;
@@ -37,13 +43,15 @@ export interface RoadNode {
   variable?: true;
 }
 
-export interface MapRoad {
-  root: cc.Node;
-  roadNodes: RoadNode[];
+// 路标
+export interface DirectNode extends RoadNode {
+  // 路标方向
+  direction: Direction;
+  ccNode: cc.Node;
 }
 
 /**
- *  路径节点
+ *  路径节点（用于确定行走路径、行走动画持续时间）
  */
 export interface RouteNode {
   // 是否寻路结束
