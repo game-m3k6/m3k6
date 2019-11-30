@@ -26,10 +26,11 @@ export enum WalkDirection {
 export interface RoadNode {
   // 道路节点名称
   name: string;
-  // 前一个节点名称
-  previous: string;
-  // 下一个节点名称
-  next: string;
+  /**
+   * 支持的下一个道路节点名称
+   * （与supportDirection方向对应）
+   */
+  nodes: string[];
   /**
    * 支持的方向列表
    *  第一个元素为前一个节点名称
@@ -62,4 +63,6 @@ export interface RouteNode {
   duration: number;
   // 剩余点数（只在为完成寻路时有用）
   remainingDice: number;
+  // 人物方向
+  direction: Direction;
 }

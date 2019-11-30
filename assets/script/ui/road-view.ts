@@ -1,7 +1,6 @@
 import { log } from '../common/logger';
 import { DirectNode, Direction, RoadNode } from '../models/road';
-import { getRandomInt } from '../utils/get-random-int';
-
+import { randomDirection } from '../utils/route-helpers';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -50,6 +49,33 @@ export default class RoadView extends cc.Component {
   }
 
   /**
+   * 获取路标节点
+   * @param nodeName 节点名称
+   */
+  getDirectNode(nodeName: string): DirectNode {
+    return this.directNodes.find((o) => o.name === nodeName);
+  }
+
+  /**
+   * 设置路标节点方向
+   *
+   * @param name 路标节点名称
+   * @param direction 方向
+   */
+  setDirectNodeDirection(name: string, direction: Direction): void {
+    const node = this.directNodes.find((o) => o.name === name);
+    if (node) {
+      const animationComp = node.ccNode.getComponent(cc.Animation);
+      const direcClip = animationComp.getClips().find((c) => c.name === direction);
+      if (direcClip) {
+        log({ msg: `(${name})设置道路方向: ${direction}`, channel: '道路控制器' });
+        node.direction = direction;
+        animationComp.play(direcClip.name);
+      }
+    }
+  }
+
+  /**
    * 初始化路标
    */
   private initDirectNodes(): void {
@@ -61,40 +87,10 @@ export default class RoadView extends cc.Component {
         const directNode: DirectNode = {
           ...variNode,
           ccNode,
-          direction: this.randomDirection(variNode.supportDirection),
+          direction: randomDirection(variNode.supportDirection),
         };
         this.directNodes.push(directNode);
-        this.setNodeDirection(directNode.name, directNode.direction);
-      }
-    }
-  }
-
-  /**
-   * 随机方向
-   * @param directions 支持的方向列表
-   */
-  private randomDirection(directions: Direction[]): Direction {
-    // 取得随机位置
-    const posi = getRandomInt(0, directions.length - 1);
-
-    return directions[posi];
-  }
-
-  /**
-   * 设置路标节点方向
-   *
-   * @param name 路标节点名称
-   * @param dirction 方向
-   */
-  private setNodeDirection(name: string, dirction: Direction): void {
-    const node = this.directNodes.find((o) => o.name === name);
-    if (node) {
-      const animationComp = node.ccNode.getComponent(cc.Animation);
-      const direcClip = animationComp.getClips().find((c) => c.name === dirction);
-      if (direcClip) {
-        log({ msg: `(${name})设置道路方向: ${dirction}`, channel: '道路控制器' });
-        node.direction = dirction;
-        animationComp.play(direcClip.name);
+        this.setDirectNodeDirection(directNode.name, directNode.direction);
       }
     }
   }

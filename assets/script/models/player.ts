@@ -6,6 +6,6 @@ export interface PlayerState {
   dice: ZhugeDice;
   diceNum: number;
   position: RoadNode;
-  // 是否倒序走路（正序时使用next，倒序使用previous）
-  walkDesc: boolean;
+  // 角色方向
+  direction: Direction;
 }

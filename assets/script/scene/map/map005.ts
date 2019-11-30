@@ -1,6 +1,7 @@
 import EventType = cc.Node.EventType;
 
 import { map005Road } from '../../data/map/map005-data';
+import { Direction } from '../../models/road';
 import { MinterView } from '../../ui/minter/minter-view';
 import PlayerView from '../../ui/player/player-view';
 import RoadView from '../../ui/road-view';
@@ -54,14 +55,14 @@ export default class Map005 extends cc.Component {
 
     // 初始化玩家组件
     this.playerComp = this.player1.getComponent('player-view');
-    const initName = '10/10-04'; // '11/11-03'
+    const initName = '11/11-03'; // '11/11-03'
     this.playerComp.init({
       state: {
         name: '曹操',
         dice: { max: 12, dice: 6 },
         diceNum: 5,
         position: this.roadComp.getRoadNode(initName),
-        walkDesc: true,
+        direction: Direction.TopRight,
       },
       mapRoad: this.roadComp,
     });

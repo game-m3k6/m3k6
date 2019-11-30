@@ -13,8 +13,6 @@ const { ccclass, property } = cc._decorator;
 export default class PlayerView extends cc.Component implements IPlayer {
   animationComp: cc.Animation;
   state: PlayerState = {} as any;
-  // 角色方向
-  direction: Direction;
   // 道路
   mapRoad: RoadView;
 
@@ -41,12 +39,12 @@ export default class PlayerView extends cc.Component implements IPlayer {
    * @param direction
    */
   setDirection(direction?: Direction) {
-    this.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
-    const direc = direction ? direction : this.direction;
+    // this.state.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
+    const direc = direction ? direction : this.state.direction;
     const direcClip = this.animationComp.getClips().find((c) => c.name === direc);
     if (direcClip) {
       log({ msg: `(${this.state.name})设置方向: ${direc}`, channel: '角色控制器' });
-      this.direction = direc;
+      this.state.direction = direc;
       this.animationComp.play(direcClip.name);
     }
   }
@@ -56,8 +54,8 @@ export default class PlayerView extends cc.Component implements IPlayer {
    * @param direction
    */
   setWalkDirection(direction?: Direction) {
-    this.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
-    const direc = direction ? direction : this.direction;
+    // this.state.direction = this.state.position.supportDirection[this.state.walkDesc ? 0 : 1];
+    const direc = direction ? direction : this.state.direction;
     const walkDirection = `walk-${direc}` as WalkDirection;
     const direcClip = this.animationComp.getClips().find((c) => c.name === walkDirection);
     if (direcClip) {
@@ -96,7 +94,7 @@ export default class PlayerView extends cc.Component implements IPlayer {
       const cb = cc.callFunc(() => {
         log({ msg: `走完当前路径`, channel: '角色控制器', data: { routeNode } });
         this.state.position = routeNode.node;
-        routeNode.finish ? this.setDirection() : this.setWalkDirection();
+        routeNode.finish ? this.setDirection(routeNode.direction) : this.setWalkDirection(routeNode.direction);
       });
       actions.push(walkAction, cb);
     }
