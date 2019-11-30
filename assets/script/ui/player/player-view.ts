@@ -95,6 +95,11 @@ export default class PlayerView extends cc.Component implements IPlayer {
         log({ msg: `走完当前路径`, channel: '角色控制器', data: { routeNode } });
         this.state.position = routeNode.node;
         routeNode.finish ? this.setDirection(routeNode.direction) : this.setWalkDirection(routeNode.direction);
+
+        // 路标方向设置
+        if (routeNode.node.variable) {
+          this.mapRoad.setDirectNodeDirection(routeNode.node.name, routeNode.direction);
+        }
       });
       actions.push(walkAction, cb);
     }
