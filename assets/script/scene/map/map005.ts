@@ -1,5 +1,6 @@
 import EventType = cc.Node.EventType;
 
+import { log } from '../../common/logger';
 import { map005Road } from '../../data/map/map005-data';
 import { Direction } from '../../models/road';
 import { MinterView } from '../../ui/minter/minter-view';
@@ -69,10 +70,15 @@ export default class Map005 extends cc.Component {
 
     // 初始化控制器组件
     this.minterComp = this.minter.getComponent('minter-view');
-    this.minterComp.onDice$.subscribe((dice) => {
-      console.log(`获得结果: ${dice}`);
-      this.playerComp.walk(dice);
-    });
+    this.minterComp.onDice$.subscribe(
+      (dice) => {
+        console.log(`获得结果: ${dice}`);
+        this.playerComp.walk(dice);
+      },
+      (error) => {
+        log({ msg: `监听出错`, channel: '监听掷骰子结果', data: { error } });
+      },
+    );
     this.minterComp.mapRoad = this.roadComp;
     /*this.minterView.onDice$.subscribe((dice) => {
       console.log(`获得结果: ${dice}`);

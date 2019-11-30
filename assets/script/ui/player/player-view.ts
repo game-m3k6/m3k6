@@ -98,7 +98,7 @@ export default class PlayerView extends cc.Component implements IPlayer {
 
         // 路标方向设置
         if (routeNode.node.variable) {
-          this.mapRoad.setDirectNodeDirection(routeNode.node.name, routeNode.direction);
+          this.mapRoad.onChangeDirect$.next(routeNode);
         }
       });
       actions.push(walkAction, cb);

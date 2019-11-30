@@ -101,6 +101,9 @@ export class MinterView extends cc.Component {
       dice: 6,
     });
   }
+  protected onDestroy(): void {
+    this.onDice$.complete();
+  }
 
   disable(): void {
     this.enabled = false;

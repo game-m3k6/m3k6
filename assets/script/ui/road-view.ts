@@ -1,5 +1,7 @@
+import { Subject, interval } from 'rxjs';
+
 import { log } from '../common/logger';
-import { DirectNode, Direction, RoadNode } from '../models/road';
+import { DirectNode, Direction, RoadNode, RouteNode } from '../models/road';
 import { randomDirection } from '../utils/route-helpers';
 const { ccclass, property } = cc._decorator;
 
@@ -21,7 +23,11 @@ export default class RoadView extends cc.Component {
   // 路标节点列表
   directNodes: DirectNode[] = [];
 
-  onLoad() {}
+  readonly onChangeDirect$ = new Subject<RouteNode>();
+
+  protected onDestroy(): void {
+    this.onChangeDirect$.complete();
+  }
 
   /**
    * 初始化道路组件
@@ -30,6 +36,21 @@ export default class RoadView extends cc.Component {
   init(nodes: RoadNode[]): void {
     this.roadNodes = nodes;
     this.initDirectNodes();
+    this.onChangeDirect$.subscribe(
+      (routeNode) => {
+        this.setDirectNodeDirection(routeNode.node.name, routeNode.direction);
+        // 如果是中继路径，设置0.1秒后更改路标方向
+        if (!routeNode.finish) {
+          setTimeout(() => {
+            const direction = randomDirection(routeNode.node.supportDirection.filter((o) => o !== routeNode.direction));
+            this.setDirectNodeDirection(routeNode.node.name, direction);
+          }, 100);
+        }
+      },
+      (error) => {
+        log({ msg: `监听出错`, channel: '监听路标变化事件', data: { error } });
+      },
+    );
   }
 
   /**
