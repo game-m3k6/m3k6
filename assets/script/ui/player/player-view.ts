@@ -3,20 +3,19 @@ import { PlayerState } from '../../models/player';
 import { Direction, RoadNode, RouteNode, WalkDirection } from '../../models/road';
 import { getWalkRouteLine } from '../../utils/route-helpers';
 import RoadView from '../road-view';
-import { IPlayer } from './player.interface';
 import ActionInterval = cc.ActionInterval;
 import ActionInstant = cc.ActionInstant;
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class PlayerView extends cc.Component implements IPlayer {
+export default class PlayerView extends cc.Component {
   animationComp: cc.Animation;
   state: PlayerState = {} as any;
   // 道路
   mapRoad: RoadView;
 
-  onLoad() {
+  onLoad(): void {
     this.animationComp = this.getComponent(cc.Animation);
 
     /*setTimeout(() => {
@@ -106,24 +105,6 @@ export default class PlayerView extends cc.Component implements IPlayer {
 
     this.node.runAction(cc.sequence(actions));
   }
-
-  moveDown(moveSize: number): void {}
-
-  moveDownOnWater(moveSize: number): void {}
-
-  moveLeft(moveSize: number): void {}
-
-  moveLeftOnWater(moveSize: number): void {}
-
-  moveRight(moveSize: number): void {}
-
-  moveRightOnWater(moveSize: number): void {}
-
-  moveUp(moveSize: number): void {}
-
-  moveUpOnWater(moveSize: number): void {}
-
-  talk(msg: string): void {}
 
   // update (dt) {}
 }
