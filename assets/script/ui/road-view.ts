@@ -3,6 +3,7 @@ import { Subject, interval } from 'rxjs';
 import { log } from '../common/logger';
 import { DirectNode, Direction, RoadNode, RouteNode } from '../models/road';
 import { randomDirection } from '../utils/route-helpers';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass

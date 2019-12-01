@@ -7,7 +7,7 @@ export enum GameScene {
    * 剧情人物选择
    */
   SelectMaster = 'select-master',
-    /**
+  /**
    * 群雄并起人物选择
    */
   SelectOne = 'select-one',
