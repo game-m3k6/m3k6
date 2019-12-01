@@ -1,13 +1,16 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.3",
   "uuid": "0a618741-7eb6-4f1a-802e-562e83826a62",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "sunquan": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "71bfaa6a-5c2d-405a-8048-9e4d1aadce18",
       "rawTextureUuid": "0a618741-7eb6-4f1a-802e-562e83826a62",
       "trimType": "auto",

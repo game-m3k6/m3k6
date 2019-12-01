@@ -30,8 +30,6 @@ export default class UnitDrag extends cc.Component {
     onLoad() {
         this.origionPosition = this.node.position;
         this.origionHeadImgPosition = this.node.getChildByName("head-img").position;
-        //this.node.on(cc.Node.EventType.TOUCH_MOVE, this.showImg, this);
-        //this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchOver, this);
         this.node.getChildByName("head-img").on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.node.getChildByName("head-img").on(cc.Node.EventType.TOUCH_END, this.onTouchOver, this);
 
@@ -57,34 +55,37 @@ export default class UnitDrag extends cc.Component {
     onTouchOver(touchEvent) {       
 
         if(this.player1.getBoundingBoxToWorld().contains(this.node.getChildByName("head-img").convertToWorldSpace(cc.p(0,0)))){
-            this.anim = this.getComponent(cc.Animation);
-            var player1Frame = this.player1.getChildByName("head-img").getComponent(cc.Sprite);            
-            cc.loader.loadRes("/master-head/" + this.lordName, cc.SpriteFrame, (err, spriteFrame) =>{
-                //player1Frame.spriteFrame = spriteFrame;
-            });
-
-        
-             showNode(this.player1.getChildByName("head-img"));
-            
-            if(null != this.player1.getComponent(PlayerSelect).lordNode){
-                var lastLordNode = this.player1.getComponent(PlayerSelect).lordNode;
-                lastLordNode.getComponent(cc.Animation).stop();
-                lastLordNode.getComponent(UnitDrag).animPlaying = false;
-                
-                
-            }
-             this.player1.getComponent(PlayerSelect).setLordNode(this.node);
-             this.anim.play();
-             this.animPlaying = true;
-
-             
-
+            this.handlePlayNode(this.player1);            
+        }else if(this.player2.getBoundingBoxToWorld().contains(this.node.getChildByName("head-img").convertToWorldSpace(cc.p(0,0)))){
+            this.handlePlayNode(this.player2);
+        }else if(this.player3.getBoundingBoxToWorld().contains(this.node.getChildByName("head-img").convertToWorldSpace(cc.p(0,0)))){
+            this.handlePlayNode(this.player3);
         } 
+        else if(this.player4.getBoundingBoxToWorld().contains(this.node.getChildByName("head-img").convertToWorldSpace(cc.p(0,0)))){
+            this.handlePlayNode(this.player4);
+        }  
         hideNode(this.node.getChildByName("head-img"));
         this.node.getChildByName("head-img").position = this.origionHeadImgPosition;
         
         this.node.setPosition(this.node.x,0);
 
+    }
+
+    handlePlayNode(playerNode: cc.Node){
+        this.anim = this.getComponent(cc.Animation);
+        var player1Frame = playerNode.getChildByName("head-img").getComponent(cc.Sprite);
+        showNode(playerNode.getChildByName("head-img"));
+        
+        if(null != playerNode.getComponent(PlayerSelect).lordNode){
+            var lastLordNode = playerNode.getComponent(PlayerSelect).lordNode;
+            lastLordNode.getComponent(cc.Animation).stop();
+            lastLordNode.getComponent(UnitDrag).animPlaying = false;
+            
+        }
+        playerNode.getComponent(PlayerSelect).setLordNode(this.node);
+        this.anim.play();
+        this.animPlaying = true;
+        
     }
 
     onMouseEnter(mouseEvent) {       

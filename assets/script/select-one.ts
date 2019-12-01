@@ -24,10 +24,6 @@ export class SelectOne extends cc.Component {
     @property(cc.Node)
     nodePlayer4 : cc.Node = null;
 
-    //lorad武将角色
-    @property(cc.Node)
-    nodeCaocao : cc.Node = null;
-
     ///地图id
     selectedMapId : String = "";
     ///地图node
@@ -61,8 +57,6 @@ export class SelectOne extends cc.Component {
 
 
     start () {
-        //this.audioId = cc.audioEngine.playEffect(this.bgm, true);
-
         this.setClickEvent(this.ok);
         this.setClickEvent(this.cancel);
         this.setClickEvent(this.left);
@@ -80,13 +74,11 @@ export class SelectOne extends cc.Component {
             case this.ok: {
                 
                 hideNode(this.ok);
-                //cc.audioEngine.stopEffect(this.audioId);
                 cc.director.loadScene(GameScene.Map005);
                 break;
             }
             case this.cancel: {
                 hideNode(this.cancel);
-                //cc.audioEngine.stopEffect(this.audioId);
                 cc.director.loadScene(GameScene.Main);
                 break;
             }
