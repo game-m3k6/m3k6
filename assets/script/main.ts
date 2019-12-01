@@ -70,6 +70,10 @@ export default class Main extends cc.Component {
           cc.director.loadScene(GameScene.SelectMaster);
           break;
         }
+        case this.stageHover: {
+          cc.director.loadScene(GameScene.SelectOne);
+          break;
+        }
         default: {
         }
       }
