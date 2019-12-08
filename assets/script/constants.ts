@@ -20,3 +20,17 @@ export enum GameScene {
 export enum City {
   Map005Zhuya = '朱崖城',
 }
+
+export enum Lord {
+  Caocao = 'lord-caocao',
+  Sunquan = 'lord-sunquan',
+  Liubei = 'lord-liubei',
+  Dongzhuo = 'lord-dongzhuo',
+  Yuanshao = 'lord-yuanshao',
+  Yuanshu = 'lord-yuanshu',
+  Liubiao = 'lord-liubiao',
+  Shixie = 'lord-shixie',
+  Cheliji = 'lord-cheliji',
+  Menghuo = 'lord-menghuo',
+  Beimihu = 'lord-beimihu',
+}
