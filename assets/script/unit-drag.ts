@@ -1,9 +1,9 @@
-import { hideNode, showNode } from './utils/node-utils';
 import PlayerSelect from './select-one-player';
+import { hideNode, showNode } from './utils/node-utils';
 import EventTouch = cc.Event.EventTouch;
 import EventMouse = cc.Event.EventMouse;
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class UnitDrag extends cc.Component {
