@@ -30,6 +30,10 @@
 
 <p align="center"><img src="public/images/main.png"></p>
 
+### 贡献者指南
+
+[贡献者指南文档](CONTRIBUTING.md)
+
 ### 开源协议
 
 [GPL-3.0-or-later](LICENSE)

@@ -72,11 +72,10 @@ export default class UnitDrag extends cc.Component {
     //设置humanOrAi
     if (null == playerNode.getComponent(PlayerSelect).lordNode) {
       playerNode.getComponent(PlayerSelect).isAi = false;
-      hideNode(playerNode.getChildByName("humanOrAi").getChildByName("human"));
-      hideNode(playerNode.getChildByName("humanOrAi").getChildByName("ai"));
-      showNode(playerNode.getChildByName("humanOrAi").getChildByName("human"));
+      hideNode(playerNode.getChildByName('humanOrAi').getChildByName('human'));
+      hideNode(playerNode.getChildByName('humanOrAi').getChildByName('ai'));
+      showNode(playerNode.getChildByName('humanOrAi').getChildByName('human'));
     }
-    
 
     //设置动画播放和头像显示
     var player1Frame = playerNode.getChildByName('head-img').getComponent(cc.Sprite);

@@ -2,10 +2,9 @@ import EventType = cc.Node.EventType;
 import EventMouse = cc.Event.EventMouse;
 
 import { GameScene } from './constants';
-import { hideNode, showNode } from './utils/node-utils';
 import PlayerSelect from './select-one-player';
+import { hideNode, showNode } from './utils/node-utils';
 import WinCondition from './win-condition';
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -40,7 +39,6 @@ export class SelectOne extends cc.Component {
   @property(cc.Node)
   winConditions: cc.Node = null;
 
-
   ///确定 取消
   @property(cc.Node)
   ok: cc.Node = null;
@@ -62,7 +60,7 @@ export class SelectOne extends cc.Component {
     this.left.on(cc.Node.EventType.MOUSE_UP, this.btnLeftUp, this);
     this.right.on(cc.Node.EventType.MOUSE_UP, this.btnRightUp, this);
   }
-  
+
   start() {
     this.setClickEvent(this.ok);
     this.setClickEvent(this.cancel);
@@ -72,7 +70,7 @@ export class SelectOne extends cc.Component {
     this.setClickEvent(this.nodePlayer2.getComponent(PlayerSelect).humanOrAi);
     this.setClickEvent(this.nodePlayer3.getComponent(PlayerSelect).humanOrAi);
     this.setClickEvent(this.nodePlayer4.getComponent(PlayerSelect).humanOrAi);
-    this.setClickEvent( this.winConditions);
+    this.setClickEvent(this.winConditions);
 
     showNode(this.mapNode.children[0]);
     showNode(this.mapNameNode.children[0]);
@@ -80,13 +78,13 @@ export class SelectOne extends cc.Component {
     this.mapIndex = 0;
   }
 
-  btnLeftUp(mouseUpEvent: EventMouse){
+  btnLeftUp(mouseUpEvent: EventMouse) {
     hideNode(this.left.getChildByName('left-click'));
   }
 
-  btnRightUp(mouseUpEvent: EventMouse){
+  btnRightUp(mouseUpEvent: EventMouse) {
     hideNode(this.right.getChildByName('right-click'));
-  } 
+  }
 
   private setClickEvent(el: cc.Node): void {
     el.on(EventType.MOUSE_DOWN, () => {
@@ -149,40 +147,56 @@ export class SelectOne extends cc.Component {
 
   private loadMapInfosByMapId(selectedMapId: String): void {
     //todo:根据mapId获取信息和胜利条件信息
-    this.mapInfoNode.getChildByName("size").getComponent(cc.Label).string = "待获取信息...";
-    this.mapInfoNode.getChildByName("independent").getComponent(cc.Label).string = "待获取信息...";
-    this.mapInfoNode.getChildByName("mapDesc").getComponent(cc.Label).string = "待获取信息...";
-    this.mapInfoNode.getChildByName("citys").getComponent(cc.Label).string = "待获取信息...";
+    this.mapInfoNode.getChildByName('size').getComponent(cc.Label).string = '待获取信息...';
+    this.mapInfoNode.getChildByName('independent').getComponent(cc.Label).string = '待获取信息...';
+    this.mapInfoNode.getChildByName('mapDesc').getComponent(cc.Label).string = '待获取信息...';
+    this.mapInfoNode.getChildByName('citys').getComponent(cc.Label).string = '待获取信息...';
 
-    this.winConditions.getChildByName("winConditionArea1").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
-    this.winConditions.getChildByName("winConditionArea2").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
-    this.winConditions.getChildByName("winConditionArea3").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
-    this.winConditions.getChildByName("winConditionArea4").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
-    this.winConditions.getChildByName("winConditionArea5").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
-    this.winConditions.getChildByName("winConditionArea6").getChildByName("condition").getComponent(cc.Label).string = "待获取信息...";
+    this.winConditions
+      .getChildByName('winConditionArea1')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
+    this.winConditions
+      .getChildByName('winConditionArea2')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
+    this.winConditions
+      .getChildByName('winConditionArea3')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
+    this.winConditions
+      .getChildByName('winConditionArea4')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
+    this.winConditions
+      .getChildByName('winConditionArea5')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
+    this.winConditions
+      .getChildByName('winConditionArea6')
+      .getChildByName('condition')
+      .getComponent(cc.Label).string = '待获取信息...';
   }
 
   //todo:封装界面数据 后续需要封装成游戏数据模型，以初始化对应的游戏场景
-  private generateGameInitData(){
+  private generateGameInitData() {
     //所选择的场景地图id
     var selectedMapId = this.selectedMapId;
     //所选择的胜利条件
     var selectedWinCondition = this.winConditions.getComponent(WinCondition).selectCondition;
     //所选择的玩家角色
-    var selectedRole:cc.Node[] = [];
-    if(null != this.nodePlayer1.getComponent(PlayerSelect).lordNode){
+    var selectedRole: cc.Node[] = [];
+    if (null != this.nodePlayer1.getComponent(PlayerSelect).lordNode) {
       selectedRole.push(this.nodePlayer1.getComponent(PlayerSelect).lordNode);
     }
-    if(null != this.nodePlayer2.getComponent(PlayerSelect).lordNode){
+    if (null != this.nodePlayer2.getComponent(PlayerSelect).lordNode) {
       selectedRole.push(this.nodePlayer1.getComponent(PlayerSelect).lordNode);
     }
-    if(null != this.nodePlayer3.getComponent(PlayerSelect).lordNode){
+    if (null != this.nodePlayer3.getComponent(PlayerSelect).lordNode) {
       selectedRole.push(this.nodePlayer1.getComponent(PlayerSelect).lordNode);
     }
-    if(null != this.nodePlayer4.getComponent(PlayerSelect).lordNode){
+    if (null != this.nodePlayer4.getComponent(PlayerSelect).lordNode) {
       selectedRole.push(this.nodePlayer1.getComponent(PlayerSelect).lordNode);
     }
-
   }
-  
 }

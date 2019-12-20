@@ -5,7 +5,7 @@
     "target": "es5",
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false
+    "strictNullChecks": false
   },
   "exclude": [
     "node_modules",

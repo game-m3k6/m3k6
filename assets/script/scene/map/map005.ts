@@ -120,7 +120,6 @@ export default class Map005 extends cc.Component {
       // self.myHeadFrame.spriteFrame = new cc.SpriteFrame(texture);
     });
 
-
     console.log(1);
     this.tiledMap.getObjectGroup('城池对象')*/
 
