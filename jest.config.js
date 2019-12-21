@@ -1,5 +1,6 @@
 module.exports = {
   rootDir: '.',
+  setupFilesAfterEnv: ['./jest.setup.js'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   modulePathIgnorePatterns: ['dist', '.history'],
   globals: {

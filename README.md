@@ -3,6 +3,7 @@
 <p align="center">光谱不做富甲天下6、自己做一个</p>
 <p align="center">
 <a href="https://github.com/zlq4863947/m3k6"><img src="https://img.shields.io/badge/license-GPL_3.0-green.svg" alt="Package License" /></a>
+<a href="https://gitlab.com/zlq4863947/m3k6/pipelines"><img src="https://gitlab.com/zlq4863947/m3k6/badges/master/pipeline.svg" alt="pipeline" /></a>
 <a href="https://gitter.im/m3k33/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/m3k33.svg" alt="Gitter" /></a>
 <a href="https://www.paypal.me/zlq4863947"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
 </p>

@@ -1,0 +1,36 @@
+image: node:10.16.0-alpine
+
+stages:
+  - build-and-test
+  - deploy
+
+.npm-install: &npm-install |
+  yarn install --frozen-lockfile
+
+# === Stage: Build and Test ===
+
+build:
+  stage: build-and-test
+  before_script:
+    - *npm-install
+    - apk add git
+  script:
+    - yarn ci:build-check
+
+test:
+  stage: build-and-test
+  before_script:
+    - *npm-install
+    - apk add git
+  script:
+    - yarn ci:test
+  coverage: /Statements\ \ \ :\ ([0-9\.]+\%)/
+
+lint:
+  stage: build-and-test
+  before_script:
+    - *npm-install
+    - apk add git
+  script:
+    - yarn ci:format
+    - yarn ci:lint
