@@ -48,6 +48,10 @@ m3k6(游戏项目根目录)
 
 <p align="center"><img src="public/images/main.png"></p>
 
+### 设计文档
+
+[游戏设计文档](docs/README.md)
+
 ### 贡献者指南
 
 [贡献者指南文档](CONTRIBUTING.md)
