@@ -33,6 +33,8 @@ export class SelectMaster extends cc.Component {
   @property(cc.Node)
   cancel: cc.Node = null;
 
+  selectMaster: 'cao' | 'sun' | 'liu';
+
   start(): void {
     this.setSelectMasterEvent(this.nodeCao);
     this.setSelectMasterEvent(this.nodeSun);
@@ -46,7 +48,8 @@ export class SelectMaster extends cc.Component {
       switch (el) {
         case this.ok: {
           hideNode(this.ok);
-          cc.director.loadScene(GameScene.Map005);
+          this.showFace();
+          setTimeout(()=>cc.director.loadScene(GameScene.Map005), 1500);
           break;
         }
         case this.cancel: {
@@ -76,6 +79,16 @@ export class SelectMaster extends cc.Component {
     });
   }
 
+  private showFace() {
+    if (this.selectMaster === 'cao') {
+      hideNode([this.nodeSun, this.nodeLiu]);
+    } else if (this.selectMaster === 'sun') {
+      hideNode([this.nodeCao, this.nodeLiu]);
+    } else if (this.selectMaster === 'liu') {
+      hideNode([this.nodeCao, this.nodeSun]);
+    }
+  }
+
   private setSelectMasterEvent(el: cc.Node): void {
     el.on(EventType.MOUSE_DOWN, () => {
       switch (el) {
@@ -98,16 +111,19 @@ export class SelectMaster extends cc.Component {
   }
 
   private checkCaoHandle(): void {
+    this.selectMaster = 'cao';
     showNode([this.goldCao, this.checkCao]);
     hideNode([this.goldSun, this.checkSun, this.goldLiu, this.checkLiu]);
   }
 
   private checkSunHandle(): void {
+    this.selectMaster = 'sun';
     showNode([this.goldSun, this.checkSun]);
     hideNode([this.goldCao, this.checkCao, this.goldLiu, this.checkLiu]);
   }
 
   private checkLiuHandle(): void {
+    this.selectMaster = 'liu';
     showNode([this.goldLiu, this.checkLiu]);
     hideNode([this.goldCao, this.checkCao, this.goldSun, this.checkSun]);
   }
