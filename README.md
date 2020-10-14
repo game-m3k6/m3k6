@@ -23,6 +23,9 @@
 
 目前正在开发中，目标支持的平台: windows、Mac、iOS、Android
 
+### demo(在线地址)
+[https://aitrade.ga/m3k6-web/](https://aitrade.ga/m3k6-web/)
+
 ### 程序结构
 
 ```  
